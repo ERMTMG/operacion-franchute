@@ -1,6 +1,15 @@
 extends TextureRect
 
 const MENU_SHOW_TRANSITION_WEIGHT: float = 0.5
+const BEFORE_QUIT_MENU_SOUNDS: Dictionary[StringName, AudioStream] = {
+	&"WINDOW_POPUP": preload("res://sounds/menu/window_popup.mp3"),
+	&"WINDOW_CLOSE": preload("res://sounds/menu/window_close.wav"),
+	&"BUTTON_PRESS": preload("res://sounds/menu/button_press.wav"),
+}
+@export var animationPlayer: AnimationPlayer
+
+func play_window_close_sound() -> void:
+	Global.GAME_MANAGER.play_sfx(BEFORE_QUIT_MENU_SOUNDS[&"WINDOW_CLOSE"])
 
 func _ready() -> void:
 	visible = false
@@ -12,14 +21,24 @@ func _physics_process(delta):
 		scale = Vector2.ZERO
 
 func _on_save_button_pressed() -> void:
+	Global.GAME_MANAGER.play_sfx(BEFORE_QUIT_MENU_SOUNDS[&"BUTTON_PRESS"])
+	animationPlayer.play("saveButtonPress")
 	SaveManager.serialize_and_save_game()
-	await get_tree().create_timer(0.5).timeout
+	await animationPlayer.animation_finished
 	get_tree().quit()
 
 func _on_dont_save_button_pressed() -> void:
-	SaveSystem.set_clear_data(true)
-	await get_tree().create_timer(0.5).timeout
+	Global.GAME_MANAGER.play_sfx(BEFORE_QUIT_MENU_SOUNDS[&"BUTTON_PRESS"])
+	animationPlayer.play("dontSaveButtonPress")
+	await animationPlayer.animation_finished
 	get_tree().quit()
 
 func _on_dont_quit_button_pressed() -> void:
+	Global.GAME_MANAGER.play_sfx(BEFORE_QUIT_MENU_SOUNDS[&"BUTTON_PRESS"])
+	animationPlayer.play("dontQuitButtonPress")
+	await animationPlayer.animation_finished
 	visible = false
+
+func _on_visibility_changed() -> void:
+	if visible and Global.GAME_MANAGER != null:
+		Global.GAME_MANAGER.play_sfx(BEFORE_QUIT_MENU_SOUNDS[&"WINDOW_POPUP"])

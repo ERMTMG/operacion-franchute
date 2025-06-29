@@ -272,6 +272,9 @@ func spawn_powerups(time: float):
 				if randi() % 5 == 0: spawn_large_heart()
 				else: spawn_small_heart()"""
 
+func _on_loaded_data():
+	if Global.HIGH_SCORE > 0: highScoreScreen.show_on_menu()
+
 func fade_in_menu():
 	gameStartButton.moveup()
 	menu.modulate.a = 0.0

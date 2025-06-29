@@ -19,6 +19,7 @@ enum BuffTypes {
 }
 var BUFF_TIMES: Array[int] # WHY can't you initialize arrays with a variable size
 @export var GAME_MANAGER: Game
+signal set_game_manager
 
 enum {
 	NONE = 0,
@@ -75,6 +76,8 @@ func reset_buffs() -> void:
 		BUFF_TIMES[buff] = 0
 
 func update(delta: float) -> void:
+	if GAME_MANAGER != null:
+		set_game_manager.emit()
 	GLOBAL_TIMER += 1
 	for buff in BuffTypes.values():
 		if BUFF_TIMES[buff] > 0: BUFF_TIMES[buff] -= 1

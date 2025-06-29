@@ -72,6 +72,8 @@ signal saved
 func _ready():
 	
 	loaded.connect(SaveManager.load_game_data)
+	await Global.set_game_manager
+	loaded.connect(Global.GAME_MANAGER._on_loaded_data)
 	# Locating what properties a Resource has by default, so that they do not get
 	# added to a Dictionary when it is formed based on a Resource.
 	var res := Resource.new()
