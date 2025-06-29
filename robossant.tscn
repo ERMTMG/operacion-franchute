@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://d0fhcg1mvmsjk"]
+
+[ext_resource type="PackedScene" uid="uid://djlei58w28vod" path="res://enemy.tscn" id="1_tj72m"]
+[ext_resource type="Script" uid="uid://bk1chajno7wjp" path="res://scripts/robossant.gd" id="2_j3e3o"]
+[ext_resource type="Shader" uid="uid://d31lr8dw8e16j" path="res://sprites/white.gdshader" id="2_mk7io"]
+[ext_resource type="Texture2D" uid="uid://b72o5h158txq3" path="res://sprites/robossant.svg" id="3_eef6r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gpm5d"]
+resource_local_to_scene = true
+shader = ExtResource("2_mk7io")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bpq2x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_eef6r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ui75a"]
+radius = 51.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oymb7"]
+radius = 38.0132
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kmr06"]
+radius = 37.0135
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yr3yu"]
+radius = 28.0713
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yk1ke"]
+radius = 23.0217
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oj7g3"]
+radius = 23.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_048tl"]
+radius = 28.0713
+
+[node name="enemy" instance=ExtResource("1_tj72m")]
+script = ExtResource("2_j3e3o")
+maxHealth = 30
+speed = 2.0
+spinSpeed = 0.01
+myScenePath = "res://robossant.tscn"
+damage = 9
+scoreAwarded = 250
+screenFlashOnDeath = true
+screenShakeOnDeath = true
+deathScreenShakeIntensity = 11.0
+deathScreenShakeDuration = 25
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_gpm5d")
+scale = Vector2(0.406332, 0.406332)
+sprite_frames = SubResource("SpriteFrames_bpq2x")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="1"]
+position = Vector2(0, 4)
+scale = Vector2(13.3, 12)
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(1, -43)
+shape = SubResource("CircleShape2D_ui75a")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(56, -32)
+shape = SubResource("CircleShape2D_oymb7")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." index="4"]
+position = Vector2(-57, -29)
+shape = SubResource("CircleShape2D_kmr06")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." index="5"]
+position = Vector2(-83, 23)
+shape = SubResource("CircleShape2D_yr3yu")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="." index="6"]
+position = Vector2(-86, 71)
+shape = SubResource("CircleShape2D_yk1ke")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="." index="7"]
+position = Vector2(85, 72)
+shape = SubResource("CircleShape2D_oj7g3")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="." index="8"]
+position = Vector2(87, 24)
+shape = SubResource("CircleShape2D_048tl")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccbxnk13w6g5a"]
+
+[ext_resource type="Texture2D" uid="uid://nn717sdab5ma" path="res://sprites/vfx/notif_1000_pts.svg" id="1_80c05"]
+[ext_resource type="Script" uid="uid://bkrspsm41fcjq" path="res://scripts/vfx/text_notif.gd" id="2_plf7c"]
+
+[node name="Sprite2D" type="Sprite2D"]
+scale = Vector2(0.26, 0.26)
+texture = ExtResource("1_80c05")
+script = ExtResource("2_plf7c")
+Y_SPEED = 0.2

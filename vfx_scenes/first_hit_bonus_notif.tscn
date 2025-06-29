@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ft308h8srjb1"]
+
+[ext_resource type="Texture2D" uid="uid://qp63ptl7yxk3" path="res://sprites/vfx/first_hit_bonus_notif.svg" id="1_ch4c1"]
+[ext_resource type="Script" uid="uid://bkrspsm41fcjq" path="res://scripts/vfx/text_notif.gd" id="2_8xqxt"]
+
+[node name="Sprite2D" type="Sprite2D"]
+z_index = 50
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_ch4c1")
+script = ExtResource("2_8xqxt")

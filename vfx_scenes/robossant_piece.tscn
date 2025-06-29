@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://bilysnwrc5v3x"]
+
+[ext_resource type="Texture2D" uid="uid://bm8aj2x7dgm3s" path="res://sprites/vfx/robossant_piece_0.svg" id="1_ihltf"]
+[ext_resource type="Texture2D" uid="uid://bui14344kdt21" path="res://sprites/vfx/robossant_piece_1.svg" id="2_5g44m"]
+[ext_resource type="Texture2D" uid="uid://52le86coi35o" path="res://sprites/vfx/robossant_piece_2.svg" id="3_dus84"]
+[ext_resource type="Texture2D" uid="uid://1lkklvepyv8a" path="res://sprites/vfx/robossant_piece_3.svg" id="4_xjg2v"]
+[ext_resource type="Texture2D" uid="uid://fsrjpqct365h" path="res://sprites/vfx/robossant_piece_4.svg" id="5_pmdcf"]
+[ext_resource type="Script" uid="uid://25mo41ser3u4" path="res://scripts/vfx/scatter_piece_vfx.gd" id="6_8x8o0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cdlw8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ihltf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_5g44m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dus84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xjg2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pmdcf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+scale = Vector2(0.792079, 0.792079)
+sprite_frames = SubResource("SpriteFrames_cdlw8")
+frame = 4
+frame_progress = 0.568094
+script = ExtResource("6_8x8o0")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpgfllq4molos"]
+
+[ext_resource type="PackedScene" uid="uid://d25js0wc8rmp2" path="res://powerup.tscn" id="1_8oghf"]
+[ext_resource type="Script" uid="uid://byuukm52qhg32" path="res://scripts/buff_powerup.gd" id="2_kqjg0"]
+
+[node name="powerup" instance=ExtResource("1_8oghf")]
+script = ExtResource("2_kqjg0")
+buffTime = 900
+buffType = 0
+myScenePath = "res://buff_powerup.tscn"

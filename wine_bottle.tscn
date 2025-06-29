@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://baf0o2v0pyq8n"]
+
+[ext_resource type="PackedScene" uid="uid://djlei58w28vod" path="res://enemy.tscn" id="1_bgbqa"]
+[ext_resource type="Script" uid="uid://lah1xo41k0j6" path="res://scripts/wine_bottle.gd" id="2_h2p8u"]
+[ext_resource type="Shader" uid="uid://d31lr8dw8e16j" path="res://sprites/white.gdshader" id="3_48ud8"]
+[ext_resource type="Texture2D" uid="uid://b0c5piqgevo84" path="res://sprites/winebottle.svg" id="4_61kj1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqdc4"]
+resource_local_to_scene = true
+shader = ExtResource("3_48ud8")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mnfhq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_61kj1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5v11y"]
+size = Vector2(86, 158)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx61x"]
+size = Vector2(32, 139)
+
+[node name="enemy" instance=ExtResource("1_bgbqa")]
+script = ExtResource("2_h2p8u")
+maxHealth = 3
+speed = 4.0
+spinSpeed = 0.02
+myScenePath = "uid://baf0o2v0pyq8n"
+damage = 8
+scoreAwarded = 75
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_aqdc4")
+scale = Vector2(0.563218, 0.563218)
+sprite_frames = SubResource("SpriteFrames_mnfhq")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="1"]
+scale = Vector2(6.8, 16.3389)
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 66)
+shape = SubResource("RectangleShape2D_5v11y")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(-1, -76.5)
+shape = SubResource("RectangleShape2D_jx61x")
+
+[node name="hp_bar" parent="." index="5"]
+visible = false

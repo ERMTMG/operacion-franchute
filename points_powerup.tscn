@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0yx2ywjsiknb"]
+
+[ext_resource type="PackedScene" uid="uid://d25js0wc8rmp2" path="res://powerup.tscn" id="1_5tdch"]
+[ext_resource type="Script" uid="uid://cwp7o80qykeqv" path="res://scripts/points_powerup.gd" id="2_sqxf3"]
+
+[node name="powerup" instance=ExtResource("1_5tdch")]
+script = ExtResource("2_sqxf3")
+pointsGiven = 0
+starVfxSpawned = 0
+textPopupTexture = null

@@ -1,0 +1,125 @@
+[gd_scene load_steps=16 format=3 uid="uid://bjsud7ce1ltir"]
+
+[ext_resource type="Script" uid="uid://csudlxd4ijsxm" path="res://scripts/croissant.gd" id="1_ap1tc"]
+[ext_resource type="Shader" uid="uid://d31lr8dw8e16j" path="res://sprites/white.gdshader" id="2_kibjn"]
+[ext_resource type="Texture2D" uid="uid://bgd013esrg4i4" path="res://sprites/croissant.svg" id="3_t0vjr"]
+[ext_resource type="PackedScene" uid="uid://cicbkednstlic" path="res://hpbar.tscn" id="4_n2xhe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fj4qe"]
+resource_local_to_scene = true
+shader = ExtResource("2_kibjn")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0t828"]
+radius = 46.0109
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2kls"]
+radius = 42.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cxs3n"]
+radius = 42.0119
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qiqjq"]
+radius = 32.0156
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ncdao"]
+radius = 32.0156
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1rbhj"]
+radius = 20.025
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_miwce"]
+radius = 22.0227
+
+[sub_resource type="Animation" id="Animation_4dw1s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_iq1fu"]
+resource_name = "hurt"
+length = 0.05
+step = 0.0333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8hiu2"]
+_data = {
+&"RESET": SubResource("Animation_4dw1s"),
+&"hurt": SubResource("Animation_iq1fu")
+}
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_ap1tc")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(1, 0.851)
+rect = Rect2(-150, -120, 300, 250)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_fj4qe")
+scale = Vector2(0.416886, 0.416887)
+texture = ExtResource("3_t0vjr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -47)
+shape = SubResource("CircleShape2D_0t828")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(51, -41)
+shape = SubResource("CircleShape2D_g2kls")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-54, -31)
+shape = SubResource("CircleShape2D_cxs3n")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-84, 15)
+shape = SubResource("CircleShape2D_qiqjq")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(86, 9)
+shape = SubResource("CircleShape2D_ncdao")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2(-88, 67)
+shape = SubResource("CircleShape2D_1rbhj")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2(88, 63)
+shape = SubResource("CircleShape2D_miwce")
+
+[node name="CanvasGroup" parent="." instance=ExtResource("4_n2xhe")]
+
+[node name="hurt" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_8hiu2")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

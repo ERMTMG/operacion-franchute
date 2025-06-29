@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://36vmw00bsx2s"]
+
+[ext_resource type="Shader" uid="uid://bqgpli7aniwua" path="res://sprites/hue_shift.gdshader" id="1_xwk5h"]
+
+[resource]
+shader = ExtResource("1_xwk5h")
+shader_parameter/Shift_Hue = 0.0

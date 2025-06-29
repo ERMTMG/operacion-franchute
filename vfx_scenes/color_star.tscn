@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://qq5xkv0r4sxm"]
+
+[ext_resource type="Texture2D" uid="uid://cljg38w42bfxt" path="res://sprites/vfx/color_star.svg" id="1_kog37"]
+[ext_resource type="Script" uid="uid://d3qohb8gnd2wf" path="res://scripts/vfx/color_star.gd" id="2_f38ac"]
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(5.96046e-08, 0)
+scale = Vector2(0.151, 0.151)
+texture = ExtResource("1_kog37")
+offset = Vector2(6, 0)
+script = ExtResource("2_f38ac")

@@ -1,0 +1,132 @@
+[gd_scene load_steps=17 format=3 uid="uid://cu68vw3woy4d4"]
+
+[ext_resource type="Script" uid="uid://csudlxd4ijsxm" path="res://scripts/croissant.gd" id="1_xxc6l"]
+[ext_resource type="Texture2D" uid="uid://bgd013esrg4i4" path="res://sprites/croissant.svg" id="2_gt132"]
+[ext_resource type="Shader" uid="uid://d31lr8dw8e16j" path="res://sprites/white.gdshader" id="2_hfddl"]
+[ext_resource type="PackedScene" uid="uid://cicbkednstlic" path="res://hpbar.tscn" id="3_ugwui"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ceo8v"]
+resource_local_to_scene = true
+shader = ExtResource("2_hfddl")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2sgtv"]
+resource_local_to_scene = true
+shader = ExtResource("2_hfddl")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2s0rl"]
+radius = 45.0111
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m46l0"]
+radius = 40.05
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o16fo"]
+radius = 39.1152
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jkhvx"]
+radius = 29.0172
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_odyai"]
+radius = 31.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rg55p"]
+radius = 21.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogel6"]
+radius = 23.0217
+
+[sub_resource type="Animation" id="Animation_w2au7"]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_sne5v"]
+resource_name = "hurt"
+length = 0.05
+step = 0.0333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cjn0k"]
+_data = {
+&"RESET": SubResource("Animation_w2au7"),
+&"hurt": SubResource("Animation_sne5v")
+}
+
+[node name="croissant" type="Area2D" groups=["enemy"]]
+material = SubResource("ShaderMaterial_ceo8v")
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_xxc6l")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(1, 0.851)
+rect = Rect2(-150, -120, 300, 250)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2sgtv")
+scale = Vector2(0.406332, 0.406332)
+texture = ExtResource("2_gt132")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -45)
+shape = SubResource("CircleShape2D_2s0rl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(52, -40)
+shape = SubResource("CircleShape2D_m46l0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-57, -29)
+shape = SubResource("CircleShape2D_o16fo")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-84, 21)
+shape = SubResource("CircleShape2D_jkhvx")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(82, 6)
+shape = SubResource("CircleShape2D_odyai")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2(-87, 71)
+shape = SubResource("CircleShape2D_rg55p")
+
+[node name="CanvasGroup" parent="." instance=ExtResource("3_ugwui")]
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2(86, 60)
+shape = SubResource("CircleShape2D_ogel6")
+
+[node name="hurt" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_cjn0k")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

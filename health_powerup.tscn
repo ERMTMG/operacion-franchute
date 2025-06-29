@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3t6dewyr4kjv"]
+
+[ext_resource type="PackedScene" uid="uid://d25js0wc8rmp2" path="res://powerup.tscn" id="1_hlq4m"]
+[ext_resource type="Script" uid="uid://b50xuqvsfudew" path="res://scripts/health_powerup.gd" id="2_s0jki"]
+
+[node name="powerup" instance=ExtResource("1_hlq4m")]
+script = ExtResource("2_s0jki")
+healthGiven = 0
+myScenePath = "res://health_powerup.tscn"

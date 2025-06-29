@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://x1f57tiebynb"]
+
+[ext_resource type="PackedScene" uid="uid://d3t6dewyr4kjv" path="res://health_powerup.tscn" id="1_pp3ro"]
+[ext_resource type="Texture2D" uid="uid://bx02agx61iwms" path="res://sprites/heart_medium.svg" id="3_ta1kn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gpeo8"]
+radius = 22.0
+
+[sub_resource type="Animation" id="Animation_0qwqd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.125, 0.125)]
+}
+
+[sub_resource type="Animation" id="Animation_mnwwx"]
+resource_name = "pulse"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.659754, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l4rau"]
+_data = {
+&"RESET": SubResource("Animation_0qwqd"),
+&"pulse": SubResource("Animation_mnwwx")
+}
+
+[node name="powerup" instance=ExtResource("1_pp3ro")]
+healthGiven = 10
+myScenePath = "res://small_heart.tscn"
+
+[node name="glowSprite" parent="." index="0"]
+scale = Vector2(0.16726, 0.16726)
+
+[node name="sprite" parent="." index="1"]
+texture = ExtResource("3_ta1kn")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_gpeo8")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="3"]
+scale = Vector2(4.7, 4.7)
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_l4rau")
+}

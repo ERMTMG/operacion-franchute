@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=3 uid="uid://djlei58w28vod"]
+
+[ext_resource type="Script" uid="uid://g0ox2f4v81el" path="res://scripts/enemy.gd" id="1_i8hy6"]
+[ext_resource type="Material" uid="uid://dlr535k8lhpps" path="res://sprites/whiteShader.tres" id="2_8qreu"]
+[ext_resource type="Texture2D" uid="uid://kgn3kuc2mgoj" path="res://sprites/placeholder.svg" id="3_hg4np"]
+[ext_resource type="PackedScene" uid="uid://cicbkednstlic" path="res://hpbar.tscn" id="4_dy7o1"]
+[ext_resource type="Texture2D" uid="uid://bvjq6vijwbe7c" path="res://sprites/placeholder2.svg" id="4_rjubh"]
+[ext_resource type="Texture2D" uid="uid://dlunh6s57cfaj" path="res://sprites/placeholder3.svg" id="5_flo2w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kl3fr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hg4np")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rjubh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_flo2w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rbrk"]
+size = Vector2(156, 156)
+
+[sub_resource type="Animation" id="Animation_1ykl7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5kdnv"]
+resource_name = "flash"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uq8d0"]
+_data = {
+&"RESET": SubResource("Animation_1ykl7"),
+&"flash": SubResource("Animation_5kdnv")
+}
+
+[node name="enemy" type="Area2D" node_paths=PackedStringArray("hpBar", "flashAnim", "sprite", "visibilityNotifier") groups=["enemy"]]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_i8hy6")
+myScenePath = "res://enemy.tscn"
+hpBar = NodePath("hp_bar")
+flashAnim = NodePath("flash")
+sprite = NodePath("sprite")
+visibilityNotifier = NodePath("VisibleOnScreenNotifier2D")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+material = ExtResource("2_8qreu")
+scale = Vector2(0.319549, 0.319549)
+sprite_frames = SubResource("SpriteFrames_kl3fr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(10.4, 10.4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1024
+shape = SubResource("RectangleShape2D_4rbrk")
+
+[node name="flash" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_uq8d0")
+}
+
+[node name="hp_bar" parent="." instance=ExtResource("4_dy7o1")]
+z_index = 100
+
+[node name="DEBUG_LABEL" type="Label" parent="."]
+visible = false
+offset_top = -125.0
+offset_right = 40.0
+offset_bottom = -102.0
+scale = Vector2(2, 2)
+text = "1"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

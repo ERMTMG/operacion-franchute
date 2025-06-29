@@ -1,0 +1,37 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://c0w47po8ruy68"]
+
+[ext_resource type="FontFile" uid="uid://bjvqu81joohel" path="res://fonts/CartoonistHand/SFCartoonistHand-Bold.ttf" id="1_eqd2q"]
+[ext_resource type="Texture2D" uid="uid://dsrtl5v840dkf" path="res://sprites/menu/check_on.svg" id="1_pwehu"]
+[ext_resource type="Texture2D" uid="uid://cp72j4x6low21" path="res://sprites/menu/check_locked.svg" id="2_u8tjt"]
+[ext_resource type="Texture2D" uid="uid://c142qst3b1r4s" path="res://sprites/menu/check_off.svg" id="2_vtey6"]
+[ext_resource type="Texture2D" uid="uid://dsk15gnd5f853" path="res://sprites/menu/slider.svg" id="3_3cgqj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i4lhl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfnf2"]
+bg_color = Color(0.368627, 0.45098, 0.458824, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ojmre"]
+
+[resource]
+default_font = ExtResource("1_eqd2q")
+CheckBox/constants/h_separation = 4
+CheckBox/icons/checked = ExtResource("1_pwehu")
+CheckBox/icons/checked_disabled = ExtResource("2_u8tjt")
+CheckBox/icons/unchecked = ExtResource("2_vtey6")
+CheckBox/icons/unchecked_disabled = ExtResource("2_u8tjt")
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_i4lhl")
+HSlider/icons/grabber = ExtResource("3_3cgqj")
+HSlider/icons/grabber_highlight = ExtResource("3_3cgqj")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_yfnf2")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_yfnf2")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 56
+Label/styles/normal = SubResource("StyleBoxEmpty_ojmre")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dadem6py0b7kw"]
+
+[ext_resource type="PackedScene" uid="uid://cj6fmt1i3oera" path="res://laser.tscn" id="1_tpl2n"]
+[ext_resource type="Texture2D" uid="uid://bw20w7nx83osv" path="res://sprites/laser_red.svg" id="2_we2ah"]
+
+[node name="CharacterBody2D" instance=ExtResource("1_tpl2n")]
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.277778, 0.277778)
+texture = ExtResource("2_we2ah")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+scale = Vector2(1.3, 0.607143)

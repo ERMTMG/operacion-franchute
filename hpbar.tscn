@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cicbkednstlic"]
+
+[ext_resource type="Script" uid="uid://dfcwj5luk32se" path="res://scripts/hp_bar.gd" id="1_6p3j8"]
+
+[node name="CanvasGroup" type="CanvasGroup"]
+script = ExtResource("1_6p3j8")
+
+[node name="border" type="ColorRect" parent="."]
+offset_right = 100.0
+offset_bottom = 20.0
+color = Color(0.188235, 0.188235, 0.188235, 1)
+
+[node name="black" type="ColorRect" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 16.0
+color = Color(0, 0, 0, 1)
+
+[node name="full" type="ColorRect" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 16.0
+color = Color(0.0745098, 0.941176, 0.0745098, 1)

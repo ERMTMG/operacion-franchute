@@ -1,0 +1,9 @@
+{
+	"TYPE" : "ENEMYSPAWN",
+	"enemyType" : "croissant",
+	"size" : 1,
+	"hp" : 15,
+	"speed" : [1,2],
+	"spinSpeed" : [0.01, 0.02],
+	"direction" : "random"
+}

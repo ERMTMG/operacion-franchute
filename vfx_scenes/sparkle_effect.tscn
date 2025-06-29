@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://cskqqemlkek3f"]
+
+[ext_resource type="Texture2D" uid="uid://bwonnejvw0yh5" path="res://sprites/vfx/sparkle.svg" id="1_gg0gj"]
+
+[sub_resource type="Gradient" id="Gradient_pvrf5"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_00u3s"]
+gradient = SubResource("Gradient_pvrf5")
+
+[sub_resource type="Curve" id="Curve_dw30f"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.994413, 0.36413), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_71ssb"]
+curve = SubResource("Curve_dw30f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_27ow1"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(10, 10, 10)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = 1.07288e-05
+angle_max = 720.0
+angular_velocity_min = 197.36
+angular_velocity_max = 405.1
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.35
+scale_curve = SubResource("CurveTexture_71ssb")
+color_ramp = SubResource("GradientTexture1D_00u3s")
+
+[node name="sparkleEffect" type="GPUParticles2D"]
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_27ow1")
+texture = ExtResource("1_gg0gj")
+lifetime = 0.3

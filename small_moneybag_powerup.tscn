@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://hjduujs1evra"]
+
+[ext_resource type="PackedScene" uid="uid://c0yx2ywjsiknb" path="res://points_powerup.tscn" id="1_ihvea"]
+[ext_resource type="Texture2D" uid="uid://nn717sdab5ma" path="res://sprites/vfx/notif_1000_pts.svg" id="2_acljm"]
+[ext_resource type="Texture2D" uid="uid://cl0l1kigymrt8" path="res://sprites/moneybag_small.svg" id="3_o6pph"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcnss"]
+size = Vector2(48, 34)
+
+[node name="powerup" instance=ExtResource("1_ihvea")]
+pointsGiven = 1000
+starVfxSpawned = 10
+textPopupTexture = ExtResource("2_acljm")
+
+[node name="sprite" parent="." index="1"]
+texture = ExtResource("3_o6pph")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("RectangleShape2D_bcnss")

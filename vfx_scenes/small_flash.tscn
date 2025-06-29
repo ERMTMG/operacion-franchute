@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh7hkwvnu3qj"]
+
+[ext_resource type="Texture2D" uid="uid://qil7d6ga0nyl" path="res://sprites/vfx/flash_small.svg" id="1_s8yjy"]
+[ext_resource type="Script" uid="uid://df4siv6cuunwl" path="res://scripts/vfx/flash.gd" id="2_v04gi"]
+
+[node name="Sprite2D" type="Sprite2D"]
+z_index = 3
+scale = Vector2(0.284722, 0.284722)
+texture = ExtResource("1_s8yjy")
+script = ExtResource("2_v04gi")

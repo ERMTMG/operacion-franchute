@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://mebc3dpirt08"]
+
+[ext_resource type="Texture2D" uid="uid://d1gbwj4d2jh0x" path="res://sprites/vfx/flash_large.svg" id="1_nlroh"]
+[ext_resource type="Script" uid="uid://df4siv6cuunwl" path="res://scripts/vfx/flash.gd" id="2_cvj33"]
+
+[node name="Sprite2D" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.97)
+z_index = 3
+scale = Vector2(0.314785, 0.314785)
+texture = ExtResource("1_nlroh")
+script = ExtResource("2_cvj33")

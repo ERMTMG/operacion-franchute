@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2g8addmwg6ns"]
+
+[ext_resource type="Texture2D" uid="uid://bln4v2uvcgufh" path="res://sprites/winesplash_0.svg" id="1_lavl4"]
+[ext_resource type="Texture2D" uid="uid://dii3metl86enm" path="res://sprites/winesplash_1.svg" id="2_j56nt"]
+[ext_resource type="Script" uid="uid://dgp7630mmjccm" path="res://scripts/vfx/wine_splash.gd" id="3_gdi8f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mgis1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lavl4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j56nt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_mgis1")
+frame = 1
+frame_progress = 0.21451
+script = ExtResource("3_gdi8f")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bokmq2wy38xhk"]
+
+[ext_resource type="PackedScene" uid="uid://cpgfllq4molos" path="res://buff_powerup.tscn" id="1_wbvpb"]
+[ext_resource type="Texture2D" uid="uid://c2c2cbdedt4c" path="res://sprites/blue_laser_powerup.svg" id="2_i32fp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_utp2v"]
+radius = 9.72659
+height = 49.9728
+
+[node name="powerup" instance=ExtResource("1_wbvpb")]
+buffType = 1
+
+[node name="sprite" parent="." index="1"]
+texture = ExtResource("2_i32fp")
+offset = Vector2(100, -100)
+
+[node name="CollisionShape2D" parent="." index="2"]
+rotation = 0.994838
+shape = SubResource("CapsuleShape2D_utp2v")

@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://c4xpp30lqaetk"]
+
+[ext_resource type="Script" uid="uid://bha65vo33bnog" path="res://scripts/player.gd" id="1_18dp5"]
+[ext_resource type="Texture2D" uid="uid://c8kn8pfct15fd" path="res://sprites/vfx/fire1.svg" id="2_r0n3o"]
+[ext_resource type="AudioStream" uid="uid://c3jcwaf4usbv6" path="res://sounds/laser.wav" id="3_4olsx"]
+[ext_resource type="Texture2D" uid="uid://b157ngf4yg43q" path="res://sprites/vfx/fire2.svg" id="3_28bh3"]
+[ext_resource type="Texture2D" uid="uid://btgud6v4go6ij" path="res://sprites/vfx/fire3.svg" id="4_f2oim"]
+[ext_resource type="Texture2D" uid="uid://ucs477jqgys8" path="res://sprites/vfx/fire4.svg" id="5_scool"]
+[ext_resource type="Material" uid="uid://36vmw00bsx2s" path="res://sprites/hueShift.tres" id="6_fira8"]
+[ext_resource type="Texture2D" uid="uid://c5xoetosvy28p" path="res://sprites/player_skins/skin1.svg" id="7_5kgc6"]
+[ext_resource type="PackedScene" uid="uid://cskqqemlkek3f" path="res://vfx_scenes/sparkle_effect.tscn" id="8_pxtxd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vtwp0"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r0n3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_28bh3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f2oim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_scool")
+}],
+"loop": true,
+"name": &"on",
+"speed": 10.0
+}]
+
+[node name="PLAYER" type="CharacterBody2D" node_paths=PackedStringArray("firingSound", "fireSprite", "otherSFX", "hitBox", "sprite", "spriteSparkleEffect") groups=["player"]]
+z_index = 10
+script = ExtResource("1_18dp5")
+firingSound = NodePath("firingSound")
+fireSprite = NodePath("fire")
+otherSFX = NodePath("sfxPlayer")
+hitBox = NodePath("CollisionPolygon2D")
+sprite = NodePath("Sprite2D")
+spriteSparkleEffect = NodePath("Sprite2D/sparkleEffect")
+
+[node name="fire" type="AnimatedSprite2D" parent="."]
+position = Vector2(-24, 0)
+scale = Vector2(0.315789, 0.315789)
+sprite_frames = SubResource("SpriteFrames_vtwp0")
+animation = &"on"
+frame_progress = 0.0751895
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("6_fira8")
+scale = Vector2(0.318584, 0.318584)
+texture = ExtResource("7_5kgc6")
+
+[node name="sparkleEffect" parent="Sprite2D" instance=ExtResource("8_pxtxd")]
+scale = Vector2(5, 3)
+emitting = false
+
+[node name="firingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4olsx")
+max_polyphony = 16
+bus = &"sfx"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(21, 0, -15, -18, -15, 18)
+
+[node name="sfxPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+max_polyphony = 5
+bus = &"sfx"

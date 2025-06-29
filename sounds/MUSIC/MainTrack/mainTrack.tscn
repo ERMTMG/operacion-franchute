@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://cnfgp7p2k4gw1"]
+
+[ext_resource type="Script" uid="uid://doyutwwad510b" path="res://scripts/music_main.gd" id="1_mrvs2"]
+[ext_resource type="AudioStream" uid="uid://btqog4tc7lmyp" path="res://sounds/MUSIC/MainTrack/base.mp3" id="2_hhl0f"]
+[ext_resource type="AudioStream" uid="uid://dwfai7b5ncsb0" path="res://sounds/MUSIC/MainTrack/chords.mp3" id="3_xahva"]
+[ext_resource type="AudioStream" uid="uid://bom264jl2ktpx" path="res://sounds/MUSIC/MainTrack/fillLead.mp3" id="4_jnp3b"]
+[ext_resource type="AudioStream" uid="uid://bras76fg85fts" path="res://sounds/MUSIC/MainTrack/guitar.mp3" id="5_5ggms"]
+[ext_resource type="AudioStream" uid="uid://bdcxhnpyt4r4h" path="res://sounds/MUSIC/MainTrack/hits.mp3" id="6_v2pp6"]
+[ext_resource type="AudioStream" uid="uid://dgdjwdvag6kbe" path="res://sounds/MUSIC/MainTrack/strings.mp3" id="7_w4nvg"]
+[ext_resource type="AudioStream" uid="uid://d3neh1uja8l7" path="res://sounds/MUSIC/MainTrack/subbass.mp3" id="8_1ntqk"]
+[ext_resource type="AudioStream" uid="uid://bqm6a1twk2np0" path="res://sounds/MUSIC/MainTrack/trombones.mp3" id="9_6e83k"]
+
+[node name="Node" type="Node"]
+process_mode = 3
+script = ExtResource("1_mrvs2")
+
+[node name="Base" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_hhl0f")
+bus = &"music"
+
+[node name="Chords" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xahva")
+bus = &"music"
+
+[node name="FillLead" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jnp3b")
+bus = &"music"
+
+[node name="Guitar" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_5ggms")
+bus = &"music"
+
+[node name="Hits" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_v2pp6")
+bus = &"music"
+
+[node name="Strings" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_w4nvg")
+bus = &"music"
+
+[node name="Subbass" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_1ntqk")
+bus = &"music"
+
+[node name="Trombones" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_6e83k")
+bus = &"music"
+
+[node name="loop" type="Timer" parent="."]
+wait_time = 101.119
+
+[connection signal="timeout" from="loop" to="." method="_on_loop_timeout"]

@@ -1,0 +1,26 @@
+{
+	"TYPE": "CHOICES",
+	"choices": [
+	{
+		"chance": 0.5,
+		"TYPE": "ENEMYSPAWN",
+		"enemyType": "croissant",
+		"size": 1,
+		"hp": 15,
+		"speed": [1,2],
+		"spinSpeed": [0.01, 0.02],
+		"direction": "random"
+	},
+	{
+		"chance": 0.5,
+		"TYPE": "ENEMYSPAWN",
+		"count": 3,
+		"enemyType": "baguette",
+		"size": 0.8,
+		"hp": 1,
+		"speed": [3, 4.5],
+		"spinSpeed": 0,
+		"direction": "random"
+	}
+	]
+}

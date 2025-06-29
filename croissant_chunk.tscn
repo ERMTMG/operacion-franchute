@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://cimlphyn6r2s2"]
+
+[ext_resource type="PackedScene" uid="uid://djlei58w28vod" path="res://enemy.tscn" id="1_70foe"]
+[ext_resource type="Script" uid="uid://dccneqd5kddtx" path="res://scripts/croissant_chunk.gd" id="2_cytbu"]
+[ext_resource type="Shader" uid="uid://d31lr8dw8e16j" path="res://sprites/white.gdshader" id="2_qrsdj"]
+[ext_resource type="Texture2D" uid="uid://v5df1dggveuh" path="res://sprites/croissantchunk1.svg" id="3_mnm0q"]
+[ext_resource type="Texture2D" uid="uid://dk2606k1eytta" path="res://sprites/croissantchunk2.svg" id="4_ta6uy"]
+[ext_resource type="Texture2D" uid="uid://dxrhmhs5chfrl" path="res://sprites/croissantchunk3.svg" id="5_sw5bk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fij5y"]
+resource_local_to_scene = true
+shader = ExtResource("2_qrsdj")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n2lpc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mnm0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ta6uy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sw5bk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c64ov"]
+radius = 27.1662
+
+[node name="enemy" instance=ExtResource("1_70foe")]
+script = ExtResource("2_cytbu")
+myScenePath = "res://croissant_chunk.tscn"
+damage = 5
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_fij5y")
+sprite_frames = SubResource("SpriteFrames_n2lpc")
+frame_progress = 0.375674
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="1"]
+scale = Vector2(3.9, 4)
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_c64ov")
+
+[node name="hp_bar" parent="." index="4"]
+bar_size = 75

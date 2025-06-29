@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs5h8vgm4r06p"]
+
+[ext_resource type="Texture2D" uid="uid://7q37x8g0rvlw" path="res://sprites/vfx/rays_large.svg" id="1_y6sjw"]
+[ext_resource type="Script" uid="uid://f34gwnuhssjo" path="res://scripts/vfx/rays.gd" id="2_d74h6"]
+
+[node name="Sprite2D" type="Sprite2D"]
+scale = Vector2(0.87931, 0.87931)
+texture = ExtResource("1_y6sjw")
+script = ExtResource("2_d74h6")
+large = true
