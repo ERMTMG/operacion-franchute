@@ -63,4 +63,5 @@ static func _load_records(gameSave: Dictionary) -> void:
 	for record in RECORDS_NAMES:
 		if record in gameSave:
 			var recordValue = gameSave[record]
+			print(record, " is ", recordValue)
 			Global.set(record, recordValue)

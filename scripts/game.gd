@@ -280,6 +280,7 @@ func spawn_powerups(time: float):
 				else: spawn_small_heart()"""
 
 func _on_loaded_data():
+	highScoreScreen.update_high_score()
 	if Global.HIGH_SCORE > 0: highScoreScreen.show_on_menu()
 
 func fade_in_menu():
