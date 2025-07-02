@@ -1,0 +1,2 @@
+extends CroissantChunk
+class_name SatanicCroissantChunk

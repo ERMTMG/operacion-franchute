@@ -13,7 +13,7 @@ const LIGHT_BG: Color = Color.WHITE
 const ChanceArray = Utils.ChanceArray
 var spawningRules: Dictionary[float, Object]
 var spawningTimestampsSorted: Array[float]
-const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_test_3.json"
+const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_croissatan_test.json"
 
 #TODO: these variables are temp
 var spawnedCroissants: int = 0
@@ -99,6 +99,13 @@ func handle_screen_shake():
 		screenshakeduration -= 1
 	else:
 		camera.position = Vector2.ZERO
+
+func count_enemies_of_type(EnemyType) -> int:
+	var count: int = 0
+	for child in get_children():
+		if child is Enemy && is_instance_of(child, EnemyType):
+			count += 1
+	return count
 
 func screen_flash():
 	if Settings.SCREEN_FLASH_ENABLED:

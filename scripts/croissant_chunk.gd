@@ -2,8 +2,8 @@ extends Enemy
 class_name CroissantChunk
 @onready var smallFlashScene: PackedScene = preload("res://vfx_scenes/small_flash.tscn")
 const MIN_SCALE: float = 0.75
-const BIG_CHUNK_SCORE: int = 25
-const SMALL_CHUNK_SCORE: int = 5
+@export var BIG_CHUNK_SCORE: int = 25
+@export var SMALL_CHUNK_SCORE: int = 5
 
 func split_into_chunks(number: int, speed: float, spin: float, size: float, hp: int) -> void:
 	_split(myScene, number, speed, spin, size, hp, false)

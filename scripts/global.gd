@@ -84,4 +84,7 @@ func update(delta: float) -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		GAME_MANAGER.ask_save_confirmation_before_quitting()
+		if !Global.INGAME:
+			GAME_MANAGER.ask_save_confirmation_before_quitting()
+		else:
+			get_tree().quit()

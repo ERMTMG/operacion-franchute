@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://nmwibjxky115"]
+
+[ext_resource type="PackedScene" uid="uid://cimlphyn6r2s2" path="res://croissant_chunk.tscn" id="1_lb1pp"]
+[ext_resource type="Script" uid="uid://d0wrd35b7bvpu" path="res://scripts/satanic_croissant_chunk.gd" id="2_vgo5i"]
+[ext_resource type="Shader" uid="uid://d31lr8dw8e16j" path="res://sprites/white.gdshader" id="3_uqvu4"]
+[ext_resource type="Texture2D" uid="uid://dkgowm2sb5jwp" path="res://sprites/croissantchunk1_satanic.svg" id="4_82iqr"]
+[ext_resource type="Texture2D" uid="uid://dri6y13ry8aos" path="res://sprites/croissantchunk2_satanic.svg" id="5_ryd1m"]
+[ext_resource type="Texture2D" uid="uid://vk5gisrj70sm" path="res://sprites/croissantchunk3_satanic.svg" id="6_kmbmd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qe3my"]
+resource_local_to_scene = true
+shader = ExtResource("3_uqvu4")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cfqvp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_82iqr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ryd1m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kmbmd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[node name="enemy" instance=ExtResource("1_lb1pp")]
+script = ExtResource("2_vgo5i")
+BIG_CHUNK_SCORE = 30
+SMALL_CHUNK_SCORE = 10
+myScenePath = "uid://nmwibjxky115"
+damage = 7
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_qe3my")
+sprite_frames = SubResource("SpriteFrames_cfqvp")
+frame_progress = 0.0

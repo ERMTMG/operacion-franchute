@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdl3fc0a85nvx"]
+
+[ext_resource type="Texture2D" uid="uid://dq724cyw1dmvh" path="res://sprites/vfx/croissatan_horn_piece_1.svg" id="1_mqde0"]
+[ext_resource type="Texture2D" uid="uid://85u7xdwlbrja" path="res://sprites/vfx/croissatan_horn_piece_2.svg" id="2_ujsge"]
+[ext_resource type="Script" uid="uid://25mo41ser3u4" path="res://scripts/vfx/scatter_piece_vfx.gd" id="3_md6yd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_otboi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mqde0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ujsge")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+scale = Vector2(0.615, 0.615)
+sprite_frames = SubResource("SpriteFrames_otboi")
+script = ExtResource("3_md6yd")
+SPIN_SPEED = 0.02
+BEGIN_VANISH_FRAME_COUNT = 50
+END_VANISH_FRAME_COUNT = 100

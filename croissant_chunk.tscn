@@ -35,6 +35,8 @@ radius = 27.1662
 
 [node name="enemy" instance=ExtResource("1_70foe")]
 script = ExtResource("2_cytbu")
+BIG_CHUNK_SCORE = 25
+SMALL_CHUNK_SCORE = 5
 myScenePath = "res://croissant_chunk.tscn"
 damage = 5
 

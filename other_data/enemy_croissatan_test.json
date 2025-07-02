@@ -1,0 +1,12 @@
+{
+	"TYPE": "INTERVALS",
+	"1e308": {
+		"TYPE": "ENEMYSPAWN",
+		"enemyType": "croissatan",
+		"size": 1,
+		"hp": 35,
+		"speed": [2,3],
+		"spinSpeed": [0.01,0.015],
+		"direction": "random",
+	}
+}
