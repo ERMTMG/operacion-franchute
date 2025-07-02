@@ -18,7 +18,8 @@ func _physics_process(delta: float) -> void:
 	chunkShootTimer += 1
 	if chunkShootTimer >= CHUNK_SHOOT_TIME_INTERVAL \
 	and Global.INGAME \
-	and Global.GAME_MANAGER.count_enemies_of_type(SatanicCroissantChunk) < MAX_TOTAL_CHUNKS:
+	and Global.GAME_MANAGER.count_enemies_of_type(SatanicCroissantChunk) < MAX_TOTAL_CHUNKS\
+	and !is_queued_for_deletion():
 		shoot_out_chunks(NUMBER_CHUNKS_SHOT, 0.667*speed, 0.9*spinSpeed, scale.x, 10)
 		chunkShootTimer = 0
 
