@@ -373,3 +373,4 @@ func get_foreground_layer() -> CanvasLayer:
 
 func ask_save_confirmation_before_quitting() -> void:
 	beforeQuittingPopup.show()
+	Global.CURRENT_MENU_SHOWING = Global.BEFORE_QUIT_POPUP

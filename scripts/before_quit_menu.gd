@@ -38,6 +38,7 @@ func _on_dont_quit_button_pressed() -> void:
 	animationPlayer.play("dontQuitButtonPress")
 	await animationPlayer.animation_finished
 	visible = false
+	Global.CURRENT_MENU_SHOWING = Global.NONE
 
 func _on_visibility_changed() -> void:
 	if visible and Global.GAME_MANAGER != null:
