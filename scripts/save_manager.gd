@@ -20,6 +20,13 @@ const RECORDS_NAMES: Array[StringName] = [
 	&"HIGH_SCORE"
 ]
 
+const SKIN_INFO_NAMES: Array[StringName] = [
+	&"CURRENT_SKIN_SHOWING",
+	&"CURRENT_PLAYER_SKIN",
+	&"TARGET_SKIN_HUE_SHIFT",
+	&"ACTUAL_SKIN_HUE_SHIFT",
+]
+
 static func serialize_and_save_game() -> void:
 	SaveSystem.set_clear_data(true)
 	serialize_game_data()
@@ -29,6 +36,7 @@ static func serialize_game_data() -> void:
 	var gameSave: GameSaveResource = GameSaveResource.new()
 	_serialize_settings(gameSave)
 	_serialize_records(gameSave)
+	_serialize_skin_info(gameSave)
 	SaveSystem.set_var("save_data", gameSave)
 
 static func _serialize_settings(gameSave: GameSaveResource) -> void:
@@ -41,12 +49,18 @@ static func _serialize_records(gameSave: GameSaveResource) -> void:
 		var recordValue = Global.get(record)
 		gameSave.set(record, recordValue)
 
+static func _serialize_skin_info(gameSave: GameSaveResource) -> void:
+	for skinInfoVar in SKIN_INFO_NAMES:
+		var skinInfoVarValue = PlayerSkins.get(skinInfoVar)
+		gameSave.set(skinInfoVar, skinInfoVarValue)
+
 static func load_game_data() -> void:
 	if SaveSystem.has("save_data"):
 		print(SaveSystem.get_var("save_data"))
 		var gameSave: Dictionary = SaveSystem.get_var("save_data")
 		_load_settings(gameSave)
 		_load_records(gameSave)
+		_load_skin_info(gameSave)
 	else:
 		print("Save data not found. Loading game with default data...")
 	
@@ -63,5 +77,10 @@ static func _load_records(gameSave: Dictionary) -> void:
 	for record in RECORDS_NAMES:
 		if record in gameSave:
 			var recordValue = gameSave[record]
-			print(record, " is ", recordValue)
 			Global.set(record, recordValue)
+
+static func _load_skin_info(gameSave: Dictionary) -> void:
+	for skinInfoVar in SKIN_INFO_NAMES:
+		if skinInfoVar in gameSave:
+			var skinInfoVarValue = gameSave[skinInfoVar]
+			PlayerSkins.set(skinInfoVar, skinInfoVarValue)
