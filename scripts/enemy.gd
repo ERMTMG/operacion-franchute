@@ -78,6 +78,7 @@ func _split(enemy: PackedScene, number: int, speed: float, spin: float, size: fl
 			ithEnemy.spawnFromEdge = false
 			ithEnemy.global_position = global_position
 			ithEnemy.direction = initialDir + i*spread
+			ithEnemy.z_index = self.z_index - 1
 			call_deferred("add_sibling", ithEnemy)
 		else:
 			push_error("bruh this ain't an enemy")
