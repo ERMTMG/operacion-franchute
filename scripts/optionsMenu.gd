@@ -3,7 +3,8 @@ var gameManager: Game = Global.GAME_MANAGER
 @export var rainbowBarCheck: CheckBox
 @export var rainbowBarCheckLock: TextureRect
 @export var optionsMenuPages: Array[Control]
-@export var checkBoxAnimationPlayer: AnimationPlayer
+@export var animationPlayer: AnimationPlayer
+@export var saveConfirmationPopup: TextureRect
 var currentlyActivePage: int = 0
 @onready var musicBusID = AudioServer.get_bus_index("music")
 @onready var sfxBusID = AudioServer.get_bus_index("sfx")
@@ -49,7 +50,7 @@ const POINTS_FOR_RAINBOW_BARS: int = 50000
 }
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	checkBoxAnimationPlayer.play("RESET")
+	animationPlayer.play("RESET")
 	visible = false
 	for page in optionsMenuPages:
 		page.visible = false
@@ -89,72 +90,72 @@ func _on_sfxslider_value_changed(value):
 func _on_screen_flash_check_toggled(toggled_on: bool) -> void:
 	Settings.SCREEN_FLASH_ENABLED = toggled_on
 	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])
-	checkBoxAnimationPlayer.play("RESET")
-	checkBoxAnimationPlayer.play("screenFlashButtonPress")
+	animationPlayer.play("RESET")
+	animationPlayer.play("screenFlashButtonPress")
 
 func _on_screen_shake_check_toggled(toggled_on: bool) -> void:
 	Settings.SCREEN_SHAKE_ENABLED = toggled_on
 	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])
-	checkBoxAnimationPlayer.play("RESET")
-	checkBoxAnimationPlayer.play("screenShakeButtonPress")
+	animationPlayer.play("RESET")
+	animationPlayer.play("screenShakeButtonPress")
 
 func _on_vfx_check_toggled(toggled_on: bool) -> void:
 	Settings.VFX_ENABLED = toggled_on
 	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])
-	checkBoxAnimationPlayer.play("RESET")
-	checkBoxAnimationPlayer.play("vfxButtonPress")
+	animationPlayer.play("RESET")
+	animationPlayer.play("vfxButtonPress")
 
 func _on_enemy_flash_check_toggled(toggled_on: bool) -> void:
 	Settings.ENEMY_FLASH_ENABLED = toggled_on
 	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])
-	checkBoxAnimationPlayer.play("RESET")
-	checkBoxAnimationPlayer.play("enemyFlashButtonPress")
+	animationPlayer.play("RESET")
+	animationPlayer.play("enemyFlashButtonPress")
 
 func _on_timer_unit_check_toggled(toggled_on: bool) -> void:
 	Settings.CHRONOMETER_UNITS_MIN_SEC = toggled_on
 	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])
-	checkBoxAnimationPlayer.play("RESET")
-	checkBoxAnimationPlayer.play("timerUnitButtonPress")
+	animationPlayer.play("RESET")
+	animationPlayer.play("timerUnitButtonPress")
 
 func _on_enemy_bars_check_toggled(toggled_on: bool) -> void:
 	Settings.ENEMY_HP_BARS_ENABLED = toggled_on
 	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])
-	checkBoxAnimationPlayer.play("RESET")
-	checkBoxAnimationPlayer.play("enemyBarsButtonPress")
+	animationPlayer.play("RESET")
+	animationPlayer.play("enemyBarsButtonPress")
 
 func _on_rainbow_bar_check_toggled(toggled_on: bool) -> void:
 	Settings.RAINBOW_HP_BARS_ENABLED = toggled_on
 	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])
-	checkBoxAnimationPlayer.play("RESET")
-	checkBoxAnimationPlayer.play("rainbowBarButtonPress")
+	animationPlayer.play("RESET")
+	animationPlayer.play("rainbowBarButtonPress")
 
 func _on_pause_screen_filter_check_toggled(toggled_on: bool) -> void:
 	Settings.PAUSE_SCREEN_FILTER_ENABLED = toggled_on
 	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])
-	checkBoxAnimationPlayer.play("RESET")
-	checkBoxAnimationPlayer.play("pauseScreenFilterButtonPress")
+	animationPlayer.play("RESET")
+	animationPlayer.play("pauseScreenFilterButtonPress")
 
 func _on_fancy_score_check_toggled(toggled_on: bool) -> void:
 	Settings.FANCY_SCORE_COUNTER_ENABLED = toggled_on
 	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])
-	checkBoxAnimationPlayer.play("RESET")
-	checkBoxAnimationPlayer.play("fancyScoreButtonPress")
+	animationPlayer.play("RESET")
+	animationPlayer.play("fancyScoreButtonPress")
 
 func _on_button_switch_page_right_pressed() -> void:
 	optionsMenuPages[currentlyActivePage].visible = false
 	currentlyActivePage = (currentlyActivePage + 1) % optionsMenuPages.size()
 	optionsMenuPages[currentlyActivePage].visible = true
 	gameManager.play_sfx(MENU_SOUNDS["BUTTON_PRESS"])
-	checkBoxAnimationPlayer.play("RESET")
-	checkBoxAnimationPlayer.play("switchPageRight")
+	animationPlayer.play("RESET")
+	animationPlayer.play("switchPageRight")
 
 func _on_button_switch_page_left_pressed() -> void:
 	optionsMenuPages[currentlyActivePage].visible = false
 	currentlyActivePage = (currentlyActivePage - 1) % optionsMenuPages.size()
 	optionsMenuPages[currentlyActivePage].visible = true
 	gameManager.play_sfx(MENU_SOUNDS["BUTTON_PRESS"])
-	checkBoxAnimationPlayer.play("RESET")
-	checkBoxAnimationPlayer.play("switchPageLeft")
+	animationPlayer.play("RESET")
+	animationPlayer.play("switchPageLeft")
 
 func _on_visibility_changed() -> void:
 	if visible:
@@ -162,3 +163,10 @@ func _on_visibility_changed() -> void:
 			checkbox.button_pressed = Settings.get(CHECKBOX_SETTINGS[checkbox])
 		for slider in SLIDERS:
 			slider.value = Settings.get(SLIDER_SETTINGS[slider])
+
+func _on_save_button_pressed() -> void:
+	if Global.CURRENT_MENU_SHOWING == Global.OPTIONS_MENU:
+		gameManager.play_sfx(MENU_SOUNDS["BUTTON_PRESS"])
+		animationPlayer.play("saveButtonPress")
+		Global.CURRENT_MENU_SHOWING = Global.OPTIONS_MENU_SAVE_CONFIRMATION_POPUP
+		saveConfirmationPopup.show()
