@@ -7,6 +7,7 @@ const BEFORE_QUIT_MENU_SOUNDS: Dictionary[StringName, AudioStream] = {
 	&"BUTTON_PRESS": preload("res://sounds/menu/button_press.wav"),
 }
 @export var animationPlayer: AnimationPlayer
+var menuToComeBackTo: int
 
 func play_window_close_sound() -> void:
 	Global.GAME_MANAGER.play_sfx(BEFORE_QUIT_MENU_SOUNDS[&"WINDOW_CLOSE"])
@@ -38,7 +39,7 @@ func _on_dont_quit_button_pressed() -> void:
 	animationPlayer.play("dontQuitButtonPress")
 	await animationPlayer.animation_finished
 	visible = false
-	Global.CURRENT_MENU_SHOWING = Global.NONE
+	Global.CURRENT_MENU_SHOWING = menuToComeBackTo
 
 func _on_visibility_changed() -> void:
 	if visible and Global.GAME_MANAGER != null:

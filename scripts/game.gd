@@ -372,5 +372,6 @@ func get_foreground_layer() -> CanvasLayer:
 	return HUD
 
 func ask_save_confirmation_before_quitting() -> void:
+	beforeQuittingPopup.menuToComeBackTo = Global.CURRENT_MENU_SHOWING
 	beforeQuittingPopup.show()
 	Global.CURRENT_MENU_SHOWING = Global.BEFORE_QUIT_POPUP
