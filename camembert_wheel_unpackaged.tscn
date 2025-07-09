@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://ckkxhwnmtxr0m"]
+
+[ext_resource type="PackedScene" uid="uid://djlei58w28vod" path="res://enemy.tscn" id="1_lqnnl"]
+[ext_resource type="Script" uid="uid://t6t2gyaqfqi3" path="res://scripts/unpackaged_camembert_wheel.gd" id="2_l413x"]
+[ext_resource type="Shader" uid="uid://d31lr8dw8e16j" path="res://sprites/white.gdshader" id="3_68kcm"]
+[ext_resource type="Texture2D" uid="uid://bp4gc3rier1yd" path="res://sprites/camembert_unpacked.svg" id="4_lxydq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_udf86"]
+resource_local_to_scene = true
+shader = ExtResource("3_68kcm")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2x44m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_lxydq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mf7ld"]
+radius = 91.0055
+
+[node name="enemy" instance=ExtResource("1_lqnnl")]
+script = ExtResource("2_l413x")
+myScenePath = "uid://ckkxhwnmtxr0m"
+damage = 8
+scoreAwarded = 450
+screenFlashOnDeath = true
+screenShakeOnDeath = true
+deathScreenShakeIntensity = 9.0
+deathScreenShakeDuration = 25
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_udf86")
+scale = Vector2(0.377734, 0.377734)
+sprite_frames = SubResource("SpriteFrames_2x44m")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_mf7ld")

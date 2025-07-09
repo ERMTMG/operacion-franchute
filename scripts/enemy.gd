@@ -58,9 +58,9 @@ func _ready() -> void:
 		offScreenFrames = -1
 	else:
 		offScreenFrames = 0
-	if sprite.sprite_frames.has_animation("default"): #default animation code: pick a random frame from the "default" animation if it exists
-		sprite.animation = "default"
-		var max: int = sprite.sprite_frames.get_frame_count("default")
+	if sprite.sprite_frames.has_animation(&"default"): #default animation code: pick a random frame from the "default" animation if it exists
+		sprite.animation = &"default"
+		var max: int = sprite.sprite_frames.get_frame_count(&"default")
 		if max > 1: sprite.frame = randi_range(0, max - 1)
 	if !showHP:
 		hpBar.hide()

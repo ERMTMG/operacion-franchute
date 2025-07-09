@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkwwmbmsu1kli"]
+
+[ext_resource type="PackedScene" uid="uid://djlei58w28vod" path="res://enemy.tscn" id="1_vp7ha"]
+[ext_resource type="Script" uid="uid://dn0ilhmv671in" path="res://scripts/packaged_camembert_wheel.gd" id="2_ttmbf"]
+[ext_resource type="Shader" uid="uid://d31lr8dw8e16j" path="res://sprites/white.gdshader" id="3_3ssh1"]
+[ext_resource type="Texture2D" uid="uid://xqwqap432rb" path="res://sprites/camembert_packaged.svg" id="4_oxxen"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u72dn"]
+resource_local_to_scene = true
+shader = ExtResource("3_3ssh1")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ifpe5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_oxxen")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c4yyu"]
+radius = 98.0459
+
+[node name="enemy" instance=ExtResource("1_vp7ha")]
+script = ExtResource("2_ttmbf")
+maxHealth = 5
+speed = 3.0
+spinSpeed = 0.01
+myScenePath = "uid://bkwwmbmsu1kli"
+damage = 6
+scoreAwarded = 50
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_u72dn")
+scale = Vector2(0.38403, 0.38403)
+sprite_frames = SubResource("SpriteFrames_ifpe5")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_c4yyu")

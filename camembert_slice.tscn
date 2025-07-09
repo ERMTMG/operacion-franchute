@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://d04enwtkjdu0j"]
+
+[ext_resource type="PackedScene" uid="uid://djlei58w28vod" path="res://enemy.tscn" id="1_gy0o1"]
+[ext_resource type="Script" uid="uid://6fjcon67an5y" path="res://scripts/camembert_slice.gd" id="2_sbvsi"]
+[ext_resource type="Shader" uid="uid://d31lr8dw8e16j" path="res://sprites/white.gdshader" id="3_sf4li"]
+[ext_resource type="Texture2D" uid="uid://bawgwgpea1hw3" path="res://sprites/camembert_slice.svg" id="4_b1a52"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r2wkg"]
+resource_local_to_scene = true
+shader = ExtResource("3_sf4li")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qehkh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_b1a52")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_r66ia"]
+points = PackedVector2Array(-40, 1, 28, -32, 38, -16, 39, 15, 27, 33)
+
+[node name="enemy" instance=ExtResource("1_gy0o1")]
+script = ExtResource("2_sbvsi")
+myScenePath = "uid://d04enwtkjdu0j"
+damage = 7
+scoreAwarded = 100
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_r2wkg")
+sprite_frames = SubResource("SpriteFrames_qehkh")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("ConvexPolygonShape2D_r66ia")
