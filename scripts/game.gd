@@ -13,7 +13,7 @@ const LIGHT_BG: Color = Color.WHITE
 const ChanceArray = Utils.ChanceArray
 var spawningRules: Dictionary[float, Object]
 var spawningTimestampsSorted: Array[float]
-const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_croissatan_test.json"
+const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_camembert_test.json"
 
 #TODO: these variables are temp
 var spawnedCroissants: int = 0

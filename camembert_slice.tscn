@@ -23,7 +23,7 @@ animations = [{
 }]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_r66ia"]
-points = PackedVector2Array(-40, 1, 28, -32, 38, -16, 39, 15, 27, 33)
+points = PackedVector2Array(40, 0, -28, -32, -38, -16, -38, 16, -28, 32)
 
 [node name="enemy" instance=ExtResource("1_gy0o1")]
 script = ExtResource("2_sbvsi")
@@ -33,6 +33,7 @@ scoreAwarded = 100
 
 [node name="sprite" parent="." index="0"]
 material = SubResource("ShaderMaterial_r2wkg")
+scale = Vector2(-0.32, -0.32)
 sprite_frames = SubResource("SpriteFrames_qehkh")
 
 [node name="CollisionShape2D" parent="." index="2"]

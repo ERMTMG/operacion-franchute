@@ -1,0 +1,12 @@
+{
+	"TYPE": "INTERVALS",
+	"1e308": {
+		"TYPE": "ENEMYSPAWN",
+		"enemyType": "camembert",
+		"size": 1,
+		"hp": 5,
+		"speed": [2,3],
+		"spinSpeed": [0.02,0.03],
+		"direction": "random",
+	}
+}

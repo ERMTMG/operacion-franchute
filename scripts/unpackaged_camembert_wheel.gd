@@ -11,6 +11,10 @@ const SLICES_HP: int = 15
 func split_into_slices(number, speed, spin, size, hp) -> void:
 	_split(camembertSliceScene, number, speed, spin, size, hp)
 
+func wrap_around() -> void:
+	super()
+	print("Camembert wheel wrapping around!")
+
 func die() -> void:
 	if !is_queued_for_deletion():
 		split_into_slices(NUM_SLICES_SPLIT, 1.333*speed, 0, scale.x, SLICES_HP)

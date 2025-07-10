@@ -132,6 +132,6 @@ const ENEMY_PACKED_SCENES: Dictionary[String, PackedScene] = {
 	"robossant"  : preload("res://robossant.tscn"),
 	"winebottle" : preload("res://wine_bottle.tscn"),
 	"croissatan" : preload("res://croissatan.tscn"),
-	
+	"camembert"  : preload("res://camembert_wheel_packaged.tscn"),
 	"" : null
 }
