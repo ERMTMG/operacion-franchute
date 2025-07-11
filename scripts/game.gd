@@ -354,7 +354,8 @@ func _on_game_timer_timeout():
 	
 func _on_enemy_timer_timeout():
 	spawn_enemies(Global.GAMETIME)
-	enemySpawnTimer.start(r(3,4))
+	#enemySpawnTimer.start(r(3,4))
+	enemySpawnTimer.start(r(7,10))
 
 func _on_button_button_down():
 	blackscreen = true

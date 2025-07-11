@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh1o27figxioc"]
+
+[ext_resource type="Texture2D" uid="uid://rwl2pkrdlvnv" path="res://sprites/vfx/camembert_paper_scrunch.svg" id="1_jut6o"]
+[ext_resource type="Script" uid="uid://25mo41ser3u4" path="res://scripts/vfx/scatter_piece_vfx.gd" id="2_bph3k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dc5wh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jut6o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+z_index = 1
+scale = Vector2(0.484848, 0.484849)
+sprite_frames = SubResource("SpriteFrames_dc5wh")
+script = ExtResource("2_bph3k")
+MAX_SPEED = 3.0
+SPIN_SPEED = 0.025
+BEGIN_VANISH_FRAME_COUNT = 60
+END_VANISH_FRAME_COUNT = 120
