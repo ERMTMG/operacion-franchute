@@ -1,20 +1,25 @@
 extends Node
+class_name PauseManager
 var isPaused: bool = false
 @export var pauseMenuAnimationPlayer: AnimationPlayer
 var musicBusIdx: int = AudioServer.get_bus_index("music")
 const MUSIC_LPF_INDEX: int = 0
+signal paused
+signal unpaused
 func _ready() -> void:
 	pass # Replace with function body.
 
 func pause_game() -> void:
 	get_tree().paused = true
 	isPaused = true
+	paused.emit()
 	pauseMenuAnimationPlayer.play("showPauseMenu")
 	AudioServer.set_bus_effect_enabled(musicBusIdx, MUSIC_LPF_INDEX, true)
 
 func unpause_game() -> void:
 	get_tree().paused = false
 	isPaused = false
+	unpaused.emit()
 	pauseMenuAnimationPlayer.play("hidePauseMenu")
 	AudioServer.set_bus_effect_enabled(musicBusIdx, MUSIC_LPF_INDEX, false)
 

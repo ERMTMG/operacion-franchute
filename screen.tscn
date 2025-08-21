@@ -1,4 +1,4 @@
-[gd_scene load_steps=186 format=4 uid="uid://h6dr2vm10trd"]
+[gd_scene load_steps=192 format=4 uid="uid://h6dr2vm10trd"]
 
 [ext_resource type="Script" uid="uid://b3hm7nitt7jo1" path="res://scripts/game.gd" id="1_a0ryg"]
 [ext_resource type="Script" uid="uid://dsxtcsln741ji" path="res://scripts/camera.gd" id="1_lvqik"]
@@ -64,6 +64,8 @@
 [ext_resource type="Texture2D" uid="uid://bo7qvgfoscod4" path="res://sprites/menu/dont_save_button.svg" id="55_5smgt"]
 [ext_resource type="Texture2D" uid="uid://cdr1tk886br7y" path="res://sprites/menu/dont_exit_button.svg" id="56_8b0em"]
 [ext_resource type="Script" uid="uid://cgb1wmj6owk0f" path="res://scripts/enemy_spawner.gd" id="56_lrvfu"]
+[ext_resource type="Script" uid="uid://q716ttai3227" path="res://scripts/pause_button.gd" id="61_nvg73"]
+[ext_resource type="Texture2D" uid="uid://dc35cdsqpr0jr" path="res://sprites/menu/pause_button.svg" id="62_nyfu8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qcyo7"]
 radius = 1.0
@@ -5339,7 +5341,15 @@ _data = {
 &"saveButtonPress": SubResource("Animation_508in")
 }
 
-[node name="main" type="Node2D" node_paths=PackedStringArray("menu", "redCover", "blackCover", "pauseMenuShaderScreen", "gameStartButton", "camera", "gameTimer", "enemySpawnTimer", "backgroundSprite", "highScoreScreen", "offScreenIndicator", "offScreenSound", "HUD", "mousePointerCollision", "basicScoreCounter", "fancyScoreCounter", "beforeQuittingPopup")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jceij"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tsarc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jcxlq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e3waa"]
+
+[node name="main" type="Node2D" node_paths=PackedStringArray("menu", "redCover", "blackCover", "pauseMenuShaderScreen", "gameStartButton", "camera", "pauseManager", "gameTimer", "enemySpawnTimer", "backgroundSprite", "highScoreScreen", "offScreenIndicator", "offScreenSound", "HUD", "mousePointerCollision", "basicScoreCounter", "fancyScoreCounter", "beforeQuittingPopup", "pauseButton")]
 script = ExtResource("1_a0ryg")
 menu = NodePath("HUD/MENU")
 redCover = NodePath("HUD/hurtRect")
@@ -5347,17 +5357,19 @@ blackCover = NodePath("HUD/fadeToBlack")
 pauseMenuShaderScreen = NodePath("HUD/screenShader")
 gameStartButton = NodePath("HUD/MENU/gameStartButton")
 camera = NodePath("Camera2D")
+pauseManager = NodePath("pauseManager")
 gameTimer = NodePath("GameTimer")
 enemySpawnTimer = NodePath("EnemyTimer")
 backgroundSprite = NodePath("bg")
 highScoreScreen = NodePath("HUD/MENU/hiscore")
-offScreenIndicator = NodePath("HUD/Control/offScreenIndicator")
+offScreenIndicator = NodePath("HUD/offScreenIndicatorContainer/offScreenIndicator")
 offScreenSound = NodePath("offScreenSound")
 HUD = NodePath("HUD")
 mousePointerCollision = NodePath("mousePointerCollision")
 basicScoreCounter = NodePath("HUD/basicScoreCounter")
 fancyScoreCounter = NodePath("HUD/scoreCounter")
 beforeQuittingPopup = NodePath("HUD/beforeQuitPopup")
+pauseButton = NodePath("HUD/pauseButton")
 
 [node name="mousePointerCollision" type="Area2D" parent="."]
 
@@ -5603,7 +5615,7 @@ grow_vertical = 2
 size_flags_horizontal = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Control" type="Control" parent="HUD"]
+[node name="offScreenIndicatorContainer" type="Control" parent="HUD"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -5617,7 +5629,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="offScreenIndicator" type="Sprite2D" parent="HUD/Control"]
+[node name="offScreenIndicator" type="Sprite2D" parent="HUD/offScreenIndicatorContainer"]
 visible = false
 material = SubResource("ShaderMaterial_eixse")
 scale = Vector2(0.5, 0.5)
@@ -6586,6 +6598,26 @@ libraries = {
 &"": SubResource("AnimationLibrary_2dcsf")
 }
 
+[node name="pauseButton" type="Button" parent="HUD" node_paths=PackedStringArray("sprite")]
+process_mode = 3
+z_index = 1001
+offset_left = -100.0
+offset_top = 53.0
+offset_right = -30.0
+offset_bottom = 108.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jceij")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tsarc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jcxlq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_e3waa")
+flat = true
+script = ExtResource("61_nvg73")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/pauseButton"]
+position = Vector2(46, 26)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("62_nyfu8")
+
 [node name="GameTimer" type="Timer" parent="."]
 wait_time = 0.1
 
@@ -6651,6 +6683,8 @@ script = ExtResource("56_lrvfu")
 [connection signal="pressed" from="HUD/beforeQuitPopup/saveButton" to="HUD/beforeQuitPopup" method="_on_save_button_pressed"]
 [connection signal="pressed" from="HUD/beforeQuitPopup/dontSaveButton" to="HUD/beforeQuitPopup" method="_on_dont_save_button_pressed"]
 [connection signal="pressed" from="HUD/beforeQuitPopup/dontQuitButton" to="HUD/beforeQuitPopup" method="_on_dont_quit_button_pressed"]
+[connection signal="pressed" from="HUD/pauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="HUD/pauseButton" to="HUD/pauseButton" method="_on_pressed"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="MenuTimer" to="." method="_on_menu_timer_timeout"]

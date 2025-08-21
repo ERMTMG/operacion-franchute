@@ -27,6 +27,10 @@ SaveSystem="*res://addons/save_system/save_system.gd"
 
 window/size/resizable=false
 
+[dotnet]
+
+project/assembly_name="operación franchute"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/save_system/plugin.cfg")

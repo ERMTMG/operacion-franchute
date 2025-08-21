@@ -13,7 +13,7 @@ const LIGHT_BG: Color = Color.WHITE
 const ChanceArray = Utils.ChanceArray
 var spawningRules: Dictionary[float, Object]
 var spawningTimestampsSorted: Array[float]
-const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_camembert_test.json"
+const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_test_3.json"
 
 #TODO: these variables are temp
 var spawnedCroissants: int = 0
@@ -26,6 +26,7 @@ var spawnedRobossants: int = 0
 @export var pauseMenuShaderScreen: ColorRect
 @export var gameStartButton: GameStartButton
 @export var camera: Camera2D
+@export var pauseManager: PauseManager
 @export var gameTimer: Timer
 @export var enemySpawnTimer: Timer
 @export var backgroundSprite: AnimatedSprite2D
@@ -37,6 +38,7 @@ var spawnedRobossants: int = 0
 @export var basicScoreCounter: Label
 @export var fancyScoreCounter: ScoreLabel
 @export var beforeQuittingPopup: TextureRect
+@export var pauseButton: PauseButtonClass
 const PlayerScene: PackedScene = preload("res://player.tscn")
 
 #POWERUPS
@@ -232,6 +234,7 @@ func start_game():
 func unfade_and_start():
 	blackscreen = false
 	menu.visible = false
+	pauseButton.show_on_screen()
 	start_game()
 
 func spawn_enemies(time: float):
@@ -284,6 +287,7 @@ func _on_loaded_data():
 	if Global.HIGH_SCORE > 0: highScoreScreen.show_on_menu()
 
 func fade_in_menu():
+	pauseButton.hide_from_screen()
 	gameStartButton.moveup()
 	menu.modulate.a = 0.0
 	menu.visible = true
@@ -376,3 +380,8 @@ func ask_save_confirmation_before_quitting() -> void:
 	beforeQuittingPopup.menuToComeBackTo = Global.CURRENT_MENU_SHOWING
 	beforeQuittingPopup.show()
 	Global.CURRENT_MENU_SHOWING = Global.BEFORE_QUIT_POPUP
+
+func _on_pause_button_pressed() -> void:
+	pauseManager.pause_game()
+	await pauseManager.unpaused
+	pauseButton.show_on_screen()
