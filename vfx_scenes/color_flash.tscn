@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://drnpwet8yadsf"]
+
+[ext_resource type="Texture2D" uid="uid://d3xwdslcfbelm" path="res://sprites/vfx/flash_color.svg" id="1_aysev"]
+[ext_resource type="Script" uid="uid://d33jwln67m807" path="res://scripts/vfx/rainbow_flash.gd" id="2_7rx7b"]
+
+[node name="Sprite2D" type="Sprite2D"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_aysev")
+script = ExtResource("2_7rx7b")

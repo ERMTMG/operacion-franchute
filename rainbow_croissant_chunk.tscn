@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://be70m3n8lq1ve"]
+
+[ext_resource type="PackedScene" uid="uid://djlei58w28vod" path="res://enemy.tscn" id="1_pbf5u"]
+[ext_resource type="Script" uid="uid://uvs74iq8byj2" path="res://scripts/rainbow_croissant_chunk.gd" id="2_a8qad"]
+[ext_resource type="Shader" uid="uid://d31lr8dw8e16j" path="res://sprites/white.gdshader" id="3_xmjs0"]
+[ext_resource type="Texture2D" uid="uid://bo3gdnhp04ohk" path="res://sprites/croissantchunk1_rainbow.svg" id="4_2ypd0"]
+[ext_resource type="Texture2D" uid="uid://brscdy5qvsu3y" path="res://sprites/croissantchunk2_rainbow.svg" id="5_rsnqb"]
+[ext_resource type="Texture2D" uid="uid://be6ecgp4kunfn" path="res://sprites/croissantchunk3_rainbow.svg" id="6_ym0ea"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_si3dc"]
+resource_local_to_scene = true
+shader = ExtResource("3_xmjs0")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yv31h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2ypd0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rsnqb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ym0ea")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h4rg4"]
+radius = 27.17
+
+[node name="enemy" instance=ExtResource("1_pbf5u")]
+script = ExtResource("2_a8qad")
+colorHue = 0.0
+BIG_CHUNK_SCORE = 25
+SMALL_CHUNK_SCORE = 5
+myScenePath = "uid://be70m3n8lq1ve"
+damage = 9
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_si3dc")
+sprite_frames = SubResource("SpriteFrames_yv31h")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="1"]
+scale = Vector2(4, 4)
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_h4rg4")
+
+[node name="hp_bar" parent="." index="4"]
+bar_size = 75

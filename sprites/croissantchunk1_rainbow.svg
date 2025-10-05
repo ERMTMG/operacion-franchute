@@ -1,0 +1,9 @@
+<!-- Created with PixiEditor (https://pixieditor.net) -->
+<svg version="1.1" viewBox="0 0 100 75" xmlns="http://www.w3.org/2000/svg">
+  <g opacity="1" id="New folder">
+    <g opacity="1" id="New folder">
+      <path d="M0 75.778L0 0L100.955 0L100.955 75.778L0 75.778ZM57.9412 35.8699L73.3404 31.4302L85.6736 27.8746L88.0554 44.1849L75.1515 40.6219L57.9412 35.8699Z" fill-rule="nonzero" transform="matrix(1, 0, 0, 1, 0, 0)" fill="#ffffff" fill-opacity="0" stroke="#ffffff" stroke-width="0" stroke-linecap="butt" stroke-linejoin="miter" opacity="1" id="Path" />
+      <path d="M63.4971 37.561C62.9829 55.1734 56.3829 52.5617 50.0942 52.5139C43.8054 52.4662 36.7881 51.5288 36.5038 41.1601C36.3788 36.1457 49.9423 19.8205 56.6845 22.6504C62.1969 24.9641 63.1704 30.7537 63.4971 37.561L63.4971 37.561Z" fill-rule="nonzero" transform="matrix(1, 0, 0, 1, 0, 0)" fill="#dfd8cd" fill-opacity="1" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" opacity="1" id="Path" />
+    </g>
+  </g>
+</svg>
