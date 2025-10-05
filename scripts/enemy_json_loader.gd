@@ -127,11 +127,12 @@ static func enemy_from_dict(jsonDict: Dictionary) -> EnemySpawner.EnemySpawn:
 	return null # UNREACHABLE
 	
 const ENEMY_PACKED_SCENES: Dictionary[String, PackedScene] = {
-	"croissant"  : preload("res://croissant.tscn"),
-	"baguette"   : preload("res://baguette.tscn"),
-	"robossant"  : preload("res://robossant.tscn"),
-	"winebottle" : preload("res://wine_bottle.tscn"),
-	"croissatan" : preload("res://croissatan.tscn"),
-	"camembert"  : preload("res://camembert_wheel_packaged.tscn"),
+	"croissant"        : preload("res://croissant.tscn"),
+	"baguette"         : preload("res://baguette.tscn"),
+	"robossant"        : preload("res://robossant.tscn"),
+	"winebottle"       : preload("res://wine_bottle.tscn"),
+	"croissatan"       : preload("res://croissatan.tscn"),
+	"camembert"        : preload("res://camembert_wheel_packaged.tscn"),
+	"rainbowcroissant" : preload("res://rainbow_croissant.tscn"),
 	"" : null
 }

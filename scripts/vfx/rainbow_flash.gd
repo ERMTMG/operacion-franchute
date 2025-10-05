@@ -14,4 +14,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	modulate.a -= alphaDecrement
-	
+	scale = currentSize * Vector2.ONE
+	currentSize -= sizeDecrement
+	if modulate.a <= 0.05:
+		queue_free()

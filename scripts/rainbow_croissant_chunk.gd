@@ -24,4 +24,4 @@ func split_into_chunks(number: int, speed: float, spin: float, size: float, hp: 
 
 func _ready() -> void:
 	super()
-	modulate = Color.from_hsv(colorHue, 1.0, 1.0);
+	sprite.modulate = Color.from_hsv(colorHue, 1.0, 1.0);

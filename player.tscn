@@ -68,7 +68,6 @@ bus = &"sfx"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(21, 0, -15, -18, -15, 18)
-disabled = true
 
 [node name="sfxPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0

@@ -1,0 +1,12 @@
+{
+    "TYPE": "INTERVALS",
+    "1e308": {
+        "TYPE": "ENEMYSPAWN",
+        "enemyType": "rainbowcroissant",
+        "hp": 45,
+        "speed": [2.0, 3.0],
+        "size": [1.0, 1.25],
+        "spinSpeed": [0.005, 0.015],
+        "direction": "random"
+    }
+}
