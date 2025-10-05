@@ -10,6 +10,7 @@ extends Node
 @export var ENEMY_HP_BARS_ENABLED: bool = true
 @export var RAINBOW_HP_BARS_ENABLED: bool = false
 @export var PAUSE_SCREEN_FILTER_ENABLED: bool = true
+@export var ON_SCREEN_PAUSE_BUTTON_ENABLED: bool = true
 @export var FANCY_SCORE_COUNTER_ENABLED: bool = true
 
 

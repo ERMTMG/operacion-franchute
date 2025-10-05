@@ -135,6 +135,12 @@ func _on_pause_screen_filter_check_toggled(toggled_on: bool) -> void:
 	animationPlayer.play("RESET")
 	animationPlayer.play("pauseScreenFilterButtonPress")
 
+func _on_on_screen_pause_button_check_toggled(toggled_on: bool) -> void:
+	Settings.ON_SCREEN_PAUSE_BUTTON_ENABLED = toggled_on
+	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])
+	animationPlayer.play("RESET")
+	animationPlayer.play("onScreenPauseButtonButtonPress")
+
 func _on_fancy_score_check_toggled(toggled_on: bool) -> void:
 	Settings.FANCY_SCORE_COUNTER_ENABLED = toggled_on
 	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])

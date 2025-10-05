@@ -234,7 +234,8 @@ func start_game():
 func unfade_and_start():
 	blackscreen = false
 	menu.visible = false
-	pauseButton.show_on_screen()
+	if Settings.ON_SCREEN_PAUSE_BUTTON_ENABLED:
+		pauseButton.show_on_screen()
 	start_game()
 
 func spawn_enemies(time: float):
