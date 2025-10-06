@@ -17,7 +17,7 @@ func _ready() -> void:
 	Global.PROJECTILECOUNT += 1
 	if Global.PROJECTILECOUNT > Global.MAXPROJECTILECOUNT:
 		queue_free()
-	global_rotation = direction
+	rotation = direction
 
 func _exit_tree() -> void:
 	Global.PROJECTILECOUNT -= 1

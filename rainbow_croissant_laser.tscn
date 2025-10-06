@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbx81dbnjh34e"]
+
+[ext_resource type="PackedScene" uid="uid://6l6befq52cvh" path="res://enemy_projectile.tscn" id="1_m4lde"]
+[ext_resource type="Script" uid="uid://mhwh3odda6ni" path="res://scripts/rainbow_croissant_laser.gd" id="2_lwxap"]
+[ext_resource type="Texture2D" uid="uid://bpiij7xa8ogt2" path="res://sprites/rainbowlaser.svg" id="3_56kka"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aykmj"]
+size = Vector2(14, 6)
+
+[node name="CharacterBody2D" instance=ExtResource("1_m4lde")]
+modulate = Color(1.1, 0.1, 0.1, 1)
+script = ExtResource("2_lwxap")
+colorHue = 0.0
+damageDealt = 7
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_56kka")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_aykmj")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+scale = Vector2(1.2, 0.8)

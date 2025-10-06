@@ -49,8 +49,9 @@ radius = 33.0151
 [sub_resource type="CircleShape2D" id="CircleShape2D_bdj46"]
 radius = 32.0156
 
-[node name="enemy" instance=ExtResource("1_ycetg")]
+[node name="enemy" node_paths=PackedStringArray("laserSpawningPoints") instance=ExtResource("1_ycetg")]
 script = ExtResource("2_72iru")
+laserSpawningPoints = [NodePath("laserSpawningPoint1"), NodePath("laserSpawningPoint2")]
 myScenePath = "uid://4o8ufokdohwd"
 damage = 12
 scoreAwarded = 750
@@ -103,3 +104,9 @@ shape = SubResource("CircleShape2D_xx0ch")
 [node name="CollisionShape2D9" type="CollisionShape2D" parent="." index="10"]
 position = Vector2(82, 79)
 shape = SubResource("CircleShape2D_bdj46")
+
+[node name="laserSpawningPoint1" type="Node2D" parent="." index="14"]
+position = Vector2(-71, 114)
+
+[node name="laserSpawningPoint2" type="Node2D" parent="." index="15"]
+position = Vector2(88, 107)
