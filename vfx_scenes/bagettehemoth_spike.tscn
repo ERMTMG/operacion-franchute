@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnp3wkibwyakg"]
+
+[ext_resource type="Texture2D" uid="uid://cbrq8v8c6iiud" path="res://sprites/vfx/spikepiece.svg" id="1_a8tp7"]
+[ext_resource type="Script" uid="uid://25mo41ser3u4" path="res://scripts/vfx/scatter_piece_vfx.gd" id="2_2ygeb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kmyuy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a8tp7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+scale = Vector2(0.458333, 0.458333)
+sprite_frames = SubResource("SpriteFrames_kmyuy")
+script = ExtResource("2_2ygeb")
+MAX_SPEED = 4.0
+SPIN_SPEED = 0.1

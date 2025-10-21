@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://bq3am67fore0p"]
+
+[ext_resource type="PackedScene" uid="uid://djlei58w28vod" path="res://enemy.tscn" id="1_islav"]
+[ext_resource type="Shader" uid="uid://d31lr8dw8e16j" path="res://sprites/white.gdshader" id="2_82ntr"]
+[ext_resource type="Script" uid="uid://coa282e0i8nuw" path="res://scripts/baguettehemoth.gd" id="2_b35lx"]
+[ext_resource type="Texture2D" uid="uid://j66he2ky6hdo" path="res://sprites/baguettehemoth.svg" id="3_b35lx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ca5i"]
+resource_local_to_scene = true
+shader = ExtResource("2_82ntr")
+shader_parameter/enabled = false
+shader_parameter/fx_on = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eng8n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_b35lx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_we00b"]
+radius = 26.0
+height = 486.0
+
+[node name="enemy" instance=ExtResource("1_islav")]
+script = ExtResource("2_b35lx")
+damage = 20
+scoreAwarded = 500
+HP_BAR_POS = 60
+screenFlashOnDeath = true
+screenShakeOnDeath = true
+deathScreenShakeIntensity = 13.0
+deathScreenShakeDuration = 40
+canWrap = false
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_3ca5i")
+scale = Vector2(0.601093, 0.601093)
+sprite_frames = SubResource("SpriteFrames_eng8n")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="1"]
+scale = Vector2(25.6, 5.9)
+
+[node name="CollisionShape2D" parent="." index="2"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_we00b")

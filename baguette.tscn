@@ -35,6 +35,7 @@ screenFlashOnDeath = true
 screenShakeOnDeath = true
 deathScreenShakeIntensity = 13.0
 deathScreenShakeDuration = 25
+canWrap = false
 
 [node name="sprite" parent="." index="0"]
 material = SubResource("ShaderMaterial_myk42")
