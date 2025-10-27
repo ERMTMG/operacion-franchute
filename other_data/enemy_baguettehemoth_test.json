@@ -1,0 +1,12 @@
+{
+	"TYPE": "INTERVALS",
+	"1e308": {
+		"TYPE": "ENEMYSPAWN",
+		"enemyType": "baguettehemoth",
+		"size": 1,
+		"hp": 50,
+		"speed": [0.9,1.25],
+		"spinSpeed": 0,
+		"direction": "player",
+	}
+}

@@ -33,7 +33,7 @@ var offScreenFrames: int
 
 var INGAME_SPAWN_AXES: Vector2 = Vector2(900, 600)
 var MENU_SPAWN_AXES: Vector2 = Vector2(1200, 900)
-const OFF_SCREEN_FRAME_LIMIT: int = 180
+var OFF_SCREEN_FRAME_LIMIT: int = 180
 
 var pointedByMouse: bool = false
 
@@ -123,6 +123,8 @@ func wrap_around() -> void:
 	offScreenFrames = 0
 
 func _set_debug_label(text: String):
+	if !$DEBUG_LABEL.visible:
+		$DEBUG_LABEL.show()
 	$DEBUG_LABEL.text = text
 	$DEBUG_LABEL.global_position = global_position + scale.y * 120 * Vector2.UP
 	$DEBUG_LABEL.rotation = -global_rotation

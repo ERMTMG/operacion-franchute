@@ -1,30 +1,41 @@
 extends Enemy
 class_name Baguettehemoth
 
-const TURNING_STRENGTH = 0.01
+const TURNING_STRENGTH := 0.005
+const ANGLE_DIFFERENCE_MARGIN := 0.125
 
 @onready var raysScene: PackedScene = preload("res://vfx_scenes/small_rays.tscn")
 @onready var largeFlashScene: PackedScene = preload("res://vfx_scenes/largeflash.tscn")
 @onready var baguettehemothSpikeScene: PackedScene = preload("res://vfx_scenes/bagettehemoth_spike.tscn")
 
 func _ready() -> void:
+	OFF_SCREEN_FRAME_LIMIT = 600
 	# shamelessly copypasted from baguette code
 	INGAME_SPAWN_AXES = Vector2(800,800)
 	spinSpeed = 0 
 	canWrap = false 
 	global_rotation = direction
 	super()
-	
+
 
 func _physics_process(delta: float) -> void:
+	super(delta)
 	var playerPos = Global.GAME_MANAGER.get_player_position()
 	if playerPos != null:
 		var vectorToPlayer: Vector2 = (playerPos as Vector2) - self.global_position
-		var targetDirection: float = vectorToPlayer.angle()
-		var angleDiff: float = targetDirection - direction
-		self.direction = move_toward(direction, targetDirection, TURNING_STRENGTH * signf(angleDiff))
-		global_rotation = direction
-	super(delta)
+		if(vectorToPlayer.dot(Vector2.from_angle(PI + self.direction)) < 0.0):
+			# that is, if player is already behind the enemy
+			return
+		var targetDirection: float = fmod(PI + vectorToPlayer.angle(), TAU) # negated because direction is inverted in most other enemies (they go from edge to center)
+		var angleDiff: float = targetDirection - self.direction
+		if angleDiff <= -PI: angleDiff += TAU
+		if angleDiff >= PI: angleDiff -= TAU
+		if absf(angleDiff) > ANGLE_DIFFERENCE_MARGIN:
+			if angleDiff > 0:
+				self.direction += TURNING_STRENGTH
+			else:
+				self.direction -= TURNING_STRENGTH
+		self.global_rotation = self.direction
 	
 
 func die() -> void:

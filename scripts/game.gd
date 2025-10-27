@@ -13,7 +13,7 @@ const LIGHT_BG: Color = Color.WHITE
 const ChanceArray = Utils.ChanceArray
 var spawningRules: Dictionary[float, Object]
 var spawningTimestampsSorted: Array[float]
-const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_rainbowcroissant_test.json"
+const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_baguettehemoth_test.json"
 
 #TODO: these variables are temp
 var spawnedCroissants: int = 0
@@ -249,6 +249,7 @@ func spawn_enemies(time: float):
 				  get_enemy_spawn_from_enemy_spawning_chance_array(currentRule)
 			else:
 				spawn = currentRule
+			print("spawning ", spawn.enemyScene, " from game rules!")
 			spawn.spawn_as_child_of(self)
 			break # only spawn from the lowest upper bound!
 
@@ -269,10 +270,10 @@ func handle_offscreen_player_warning() -> void:
 
 
 func spawn_powerups(time: float):
-	if randi() % 300 == 0:
-		spawn_powerup(smallMoneybag)
-	if randi() % 301 == 0:
-		spawn_powerup(largeMoneybag)
+	#if randi() % 300 == 0:
+		#spawn_powerup(smallMoneybag)
+	#if randi() % 301 == 0:
+		#spawn_powerup(largeMoneybag)
 	"""if time < 60:
 		if randi() % 600 == 0:
 			spawn_ammo_box()
