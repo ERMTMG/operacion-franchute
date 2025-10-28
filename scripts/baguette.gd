@@ -1,8 +1,10 @@
 extends Enemy
 class_name Baguette
 
-@onready var raysScene = preload("res://vfx_scenes/small_rays.tscn")
-@onready var largeFlashScene = preload("res://vfx_scenes/largeflash.tscn")
+@onready var raysScene: PackedScene = preload("res://vfx_scenes/small_rays.tscn")
+@onready var largeFlashScene: PackedScene = preload("res://vfx_scenes/largeflash.tscn")
+
+@onready var blastSound: AudioStream = preload("res://sounds/explosion3.wav")
 
 func _ready() -> void:
 	INGAME_SPAWN_AXES = Vector2(800,800)
@@ -19,6 +21,7 @@ func wrap_around() -> void:
 
 func die() -> void:
 	if !is_queued_for_deletion():
+		_play_sound(blastSound, true)
 		Global.create_vfx(raysScene, global_position)
 		for i in range(-3, 4):
 			var flashPos: Vector2 = global_position + 70*scale.x*i*Vector2.from_angle(direction)

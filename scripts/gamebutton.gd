@@ -43,7 +43,7 @@ func _on_pressed():
 		position.y = YPOS - 3
 		$Timer.start()
 		modulate = Color(2.0,2.0,2.0)
-		Global.GAME_MANAGER.play_sfx(pressSound, 2.0)
+		Global.GAME_MANAGER.play_sfx(pressSound, false, 2.0)
 
 func moveup():
 	movingUp = true

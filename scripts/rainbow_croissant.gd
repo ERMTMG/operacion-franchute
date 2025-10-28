@@ -9,6 +9,9 @@ class_name RainbowCroissant
 @onready var largeFlash := preload("res://vfx_scenes/largeflash.tscn")
 @onready var colorFlash := preload("res://vfx_scenes/color_flash.tscn")
 
+@onready var blastSound: AudioStream = preload("res://sounds/explosion7.wav")
+@onready var backgroundBlast: AudioStream = preload("res://sounds/explosion4.wav")
+
 var currentLaserSpawnPointIdx: int = 0
 var currentLaserColorHue: float = 0.0
 var laserColorHueIncrement: float
@@ -49,6 +52,8 @@ func die() -> void:
 		Global.create_vfx(colorFlash, global_position + Vector2.from_angle(randf() * TAU) * 120 * randf())
 		Global.create_vfx(colorFlash, global_position + Vector2.from_angle(randf() * TAU) * 120 * randf())
 		Global.create_vfx(colorFlash, global_position + Vector2.from_angle(randf() * TAU) * 120 * randf())
+		_play_sound(backgroundBlast, false, 1.25)
+		_play_sound(blastSound, true)
 		split_into_rainbow_chunks(randi_range(5,7), 1.5 * speed, spinSpeed, 1.1*scale.x, 15)
 	super()
 

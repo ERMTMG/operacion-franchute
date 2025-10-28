@@ -4,6 +4,7 @@ class_name PackagedCamembertWheel
 @onready var unpackagedCamembertScene: PackedScene = preload("res://camembert_wheel_unpackaged.tscn")
 @onready var largeFlashScene: PackedScene = preload("res://vfx_scenes/largeflash.tscn")
 @onready var paperScrunchScene: PackedScene = preload("res://vfx_scenes/camembert_paper_scrunch.tscn")
+@onready var unpackageSound: AudioStream = preload("res://sounds/paper.wav")
 
 func transform_into_unpackaged_wheel(speed: float, spin: float, hp: int) -> void:
 	var unpackagedWheel: UnpackagedCamembertWheel = unpackagedCamembertScene.instantiate()
@@ -21,6 +22,7 @@ func transform_into_unpackaged_wheel(speed: float, spin: float, hp: int) -> void
 
 func die() -> void:
 	if !is_queued_for_deletion():
+		_play_sound(unpackageSound, true, 1.33)
 		transform_into_unpackaged_wheel(1.33*speed, 1.5*spinSpeed, 30)
 		Global.create_vfx(paperScrunchScene, global_position)
 		var largeFlash := largeFlashScene.instantiate() as Sprite2D

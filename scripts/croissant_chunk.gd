@@ -1,5 +1,7 @@
 extends Enemy
 class_name CroissantChunk
+@onready var smallBlastSound: AudioStream = preload("res://sounds/explosion2.wav")
+@onready var bigBlastSound: AudioStream = preload("res://sounds/explosion5.wav")
 @onready var smallFlashScene: PackedScene = preload("res://vfx_scenes/small_flash.tscn")
 const MIN_SCALE: float = 0.75
 @export var BIG_CHUNK_SCORE: int = 25
@@ -24,6 +26,9 @@ func die() -> void:
 		if scale.x > MIN_SCALE: 
 			childrenHP = 2
 			split_into_chunks(3, 1.5*speed, 1.5*spinSpeed, 0.5*scale.x, childrenHP)
+			_play_sound(bigBlastSound, true)
+		else:
+			_play_sound(smallBlastSound, true)
 		Global.create_vfx(smallFlashScene, global_position)
 	super()
 	

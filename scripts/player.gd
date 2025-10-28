@@ -20,11 +20,11 @@ static var firstHitBonusNotif: PackedScene = preload("res://vfx_scenes/first_hit
 @export var spriteSparkleEffect: GPUParticles2D
 static var powerUpSound: AudioStream = preload("res://sounds/powerup.wav")
 const moneyClink: AudioStream = preload("res://sounds/cling.wav")
-const explosions: Array[AudioStream] = [preload("res://sounds/explosion01.wav"),preload("res://sounds/explosion02.wav"),preload("res://sounds/explosion03.wav"),preload("res://sounds/explosion04.wav")]
+const explosions: Array[AudioStream] = [preload("res://sounds/player_explosion1.wav"),preload("res://sounds/player_explosion2.wav"),preload("res://sounds/player_explosion3.wav"),preload("res://sounds/player_explosion4.wav")]
 const redLaserFireSound: AudioStream = preload("res://sounds/laser.wav")
 const blueLaserFireSound: AudioStream = preload("res://sounds/laser_blue.mp3")
-const bigboomsound: = preload("res://sounds/explosion06.wav")
-const backgroundboom = preload("res://sounds/explosion05.wav")
+const bigboomsound: = preload("res://sounds/player_explosion6.wav")
+const backgroundboom = preload("res://sounds/player_explosion5.wav")
 var xinput: float = 0
 var yinput: float = 0
 var firetimer: int = 0

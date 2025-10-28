@@ -115,8 +115,8 @@ func _split_ranges(enemy: PackedScene, number: int,
 	if eraseAfter:
 		queue_free()
 
-func _play_sound(sfx: AudioStream, volume: float = 1.0) -> void:
-	(get_parent() as Game).play_sfx(sfx, volume)
+func _play_sound(sfx: AudioStream, pitchShift: bool = false, volume: float = 1.0) -> void:
+	(get_parent() as Game).play_sfx(sfx, pitchShift, volume)
 
 func wrap_around() -> void:
 	global_position = -global_position

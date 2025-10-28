@@ -18,7 +18,7 @@ func check_player() -> void:
 
 func die() -> void:
 	if !is_queued_for_deletion():
-		_play_sound(shatterSound, 1.25)
+		_play_sound(shatterSound, true, 1.25)
 		Global.create_vfx(largeFlashEffect, global_position)
 		var inScreenPosition: Vector2 = get_global_transform_with_canvas().origin
 		Global.create_vfx(wineSplashEffect, inScreenPosition, true, true)

@@ -13,12 +13,7 @@ const LIGHT_BG: Color = Color.WHITE
 const ChanceArray = Utils.ChanceArray
 var spawningRules: Dictionary[float, Object]
 var spawningTimestampsSorted: Array[float]
-const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_baguettehemoth_test.json"
-
-#TODO: these variables are temp
-var spawnedCroissants: int = 0
-var spawnedBaguettes: int = 0
-var spawnedRobossants: int = 0
+const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_test_3.json"
 
 @export var menu: Control 
 @export var redCover: ColorRect 
@@ -60,10 +55,12 @@ func r(min: float, max: float) -> float: # Shorthands for enemy spawning
 func ri(min: int,max: int) -> int:
 	return randi_range(min,max)
 
-func play_sfx(sfx: AudioStream, volume: float = 1.0):
+func play_sfx(sfx: AudioStream, pitchShift: bool = false, volume: float = 1.0):
 	var stream: AudioSFX = AudioSFX.new()
 	stream.stream = sfx
 	stream.volume_db = -30 + volume*20
+	if pitchShift:
+		stream.pitch_scale = randf_range(0.9, 1.11111)
 	stream.bus = "sfx"
 	stream.connect("finished", Callable(stream, "delete"))
 	add_child(stream)
@@ -249,7 +246,6 @@ func spawn_enemies(time: float):
 				  get_enemy_spawn_from_enemy_spawning_chance_array(currentRule)
 			else:
 				spawn = currentRule
-			print("spawning ", spawn.enemyScene, " from game rules!")
 			spawn.spawn_as_child_of(self)
 			break # only spawn from the lowest upper bound!
 

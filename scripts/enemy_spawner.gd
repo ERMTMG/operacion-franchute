@@ -94,7 +94,6 @@ class EnemySpawn:
 	
 	func spawn_as_child_of(node: Node) -> void:
 		for enemy in self.get_enemies():
-			print("spawned enemy of class ", enemy.get_script().get_global_name())
 			node.add_child(enemy)
 		
 static func get_enemy_spawn_from_enemy_spawning_chance_array(chanceArray: Utils.ChanceArray) -> EnemySpawn:

@@ -5,6 +5,9 @@ class_name Croissatan
 @onready var hornScene: PackedScene = preload("res://vfx_scenes/croissatan_horn_piece.tscn")
 @onready var satanicChunkScene: PackedScene = preload("res://satanic_croissant_chunk.tscn")
 
+@onready var backgroundBlast: AudioStream = preload("res://sounds/explosion4.wav")
+@onready var blastSound: AudioStream = preload("res://sounds/explosion1.wav")
+
 var chunkShootTimer: int = 0
 const CHUNK_SHOOT_TIME_INTERVAL: int = 200
 const NUMBER_CHUNKS_SHOT: int = 3
@@ -25,6 +28,8 @@ func _physics_process(delta: float) -> void:
 
 func die() -> void:
 	if !is_queued_for_deletion():
+		_play_sound(backgroundBlast, false, 1.25)
+		_play_sound(blastSound, true)
 		Global.create_vfx(largeFlashScene, global_position)
 		Global.create_vfx(raysScene, global_position)
 		var horn1 := hornScene.instantiate()

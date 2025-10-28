@@ -8,6 +8,10 @@ const ANGLE_DIFFERENCE_MARGIN := 0.125
 @onready var largeFlashScene: PackedScene = preload("res://vfx_scenes/largeflash.tscn")
 @onready var baguettehemothSpikeScene: PackedScene = preload("res://vfx_scenes/bagettehemoth_spike.tscn")
 
+@onready var blastSound1: AudioStream = preload("res://sounds/explosion6.wav")
+@onready var blastSound2: AudioStream = preload("res://sounds/explosion1.wav")
+@onready var breakSound: AudioStream = preload("res://sounds/shatter_large.wav")
+
 func _ready() -> void:
 	OFF_SCREEN_FRAME_LIMIT = 600
 	# shamelessly copypasted from baguette code
@@ -47,4 +51,7 @@ func die() -> void:
 		for i in range(4):
 			var spikePos: Vector2 = global_position + scale.x * randf_range(-120,120) * Vector2.from_angle(direction)
 			Global.create_vfx(baguettehemothSpikeScene, spikePos)
+		_play_sound(blastSound1, true)
+		_play_sound(blastSound2)
+		_play_sound(breakSound, true, 0.8)
 	super()

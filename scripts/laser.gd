@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 
 func hit_enemy() -> void:
 	var playedSfx: AudioStream = hitSounds.pick_random()
-	get_parent().play_sfx(playedSfx, 1.2)
+	get_parent().play_sfx(playedSfx, false, 1.2)
 	queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:

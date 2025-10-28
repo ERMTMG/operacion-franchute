@@ -3,7 +3,7 @@ class_name EnemyProjectile
 
 @onready var flash := preload("res://vfx_scenes/small_flash.tscn")
 @onready var hitSound := preload("res://sounds/enemy_hit.wav")
-@onready var blastSound := preload("res://sounds/explosion01.wav")
+@onready var blastSound := preload("res://sounds/player_explosion1.wav")
 
 
 @export var speed: float
@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 				var playerLaser := collision.get_collider() as Laser
 				playerLaser.hit_enemy()
 				Global.create_vfx(flash, collision.get_position())
-				Global.GAME_MANAGER.play_sfx(blastSound)
+				Global.GAME_MANAGER.play_sfx(blastSound, true)
 				hit()
 
 func hit() -> void:

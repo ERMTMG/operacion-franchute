@@ -53,7 +53,7 @@ func create_vfx(effect: PackedScene, position: Vector2, foreground: bool = false
 		var fx: Node2D = effect.instantiate()
 		if !foreground:
 			fx.global_position = position
-			add_sibling(fx)
+			GAME_MANAGER.add_child(fx)
 		else:
 			fx.position = position
 			var foregroundLayer: CanvasLayer = GAME_MANAGER.get_foreground_layer()

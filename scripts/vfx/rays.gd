@@ -8,3 +8,5 @@ func _physics_process(delta):
 	if large: modulate.a -= 0.01
 	else: modulate.a -= 0.025
 	global_rotation += spin
+	if modulate.a <= 0.005:
+		queue_free()
