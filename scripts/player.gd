@@ -29,7 +29,7 @@ var xinput: float = 0
 var yinput: float = 0
 var firetimer: int = 0
 var hurttimer: int = 0
-var maxhp: int = 1000
+var maxhp: int = 100
 var hp: int = maxhp
 var frame: int = 0
 var deathTimer: int = NOT_DEAD
@@ -151,6 +151,15 @@ func collect_powerup(powerUp: PowerUp) -> void:
 		Global.GAME_MANAGER.play_sfx(powerUpSound)
 		Global.GAME_MANAGER.play_sfx(moneyClink)
 		Global.SCORE += powerUp.pointsGiven
+	elif powerUp is ToolBoxPowerUp:
+		var maxHealthIncrease: int = (powerUp as ToolBoxPowerUp).maxHealthIncrease
+		var additionalHealing: float = (powerUp as ToolBoxPowerUp).additionalHealingFactor
+		var oldMaxHealth: int = maxhp;
+		maxhp += maxHealthIncrease;
+		var multiplier: float = (maxhp as float) / oldMaxHealth
+		hp = (multiplier * hp) as int
+		heal((additionalHealing * maxhp) as int)
+		pass
 
 func heal(addedHealth: int) -> void:
 	hp += addedHealth

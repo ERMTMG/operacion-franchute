@@ -37,13 +37,14 @@ const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_test_3.json"
 const PlayerScene: PackedScene = preload("res://player.tscn")
 
 #POWERUPS
-var genericPowerup: PackedScene = preload("res://powerup.tscn")
-var smallHeart: PackedScene = preload("res://small_heart.tscn")
-var largeHeart: PackedScene = preload("res://large_heart.tscn")
-var ammoBox: PackedScene = preload("res://ammo_box_powerup.tscn")
-var blueLaser: PackedScene = preload("res://blue_laser_powerup.tscn")
-var smallMoneybag: PackedScene = preload("res://small_moneybag_powerup.tscn")
-var largeMoneybag: PackedScene = preload("res://large_moneybag_powerup.tscn")
+@onready var genericPowerup: PackedScene = preload("res://powerup.tscn")
+@onready var smallHeart: PackedScene = preload("res://small_heart.tscn")
+@onready var largeHeart: PackedScene = preload("res://large_heart.tscn")
+@onready var ammoBox: PackedScene = preload("res://ammo_box_powerup.tscn")
+@onready var blueLaser: PackedScene = preload("res://blue_laser_powerup.tscn")
+@onready var smallMoneybag: PackedScene = preload("res://small_moneybag_powerup.tscn")
+@onready var largeMoneybag: PackedScene = preload("res://large_moneybag_powerup.tscn")
+@onready var toolBoxPowerup: PackedScene = preload("res://toolbox_powerup.tscn")
 #
 var playerdamagesignal = Callable(self, "_on_character_body_2d_damaged")
 var playerdeadsignal = Callable(self, "_on_character_body_2d_dead")
@@ -189,6 +190,9 @@ func spawn_ammo_box() -> void:
 func spawn_blue_laser_beam() -> void:
 	spawn_powerup(blueLaser)
 
+func spawn_toolbox_powerup() -> void:
+	spawn_powerup(toolBoxPowerup)
+
 func _ready():
 	Global.GAME_MANAGER = self
 	menu.show()
@@ -266,10 +270,6 @@ func handle_offscreen_player_warning() -> void:
 
 
 func spawn_powerups(time: float):
-	#if randi() % 300 == 0:
-		#spawn_powerup(smallMoneybag)
-	#if randi() % 301 == 0:
-		#spawn_powerup(largeMoneybag)
 	"""if time < 60:
 		if randi() % 600 == 0:
 			spawn_ammo_box()
@@ -356,8 +356,7 @@ func _on_game_timer_timeout():
 	
 func _on_enemy_timer_timeout():
 	spawn_enemies(Global.GAMETIME)
-	#enemySpawnTimer.start(r(3,4))
-	enemySpawnTimer.start(r(7,10))
+	enemySpawnTimer.start(r(3,4))
 
 func _on_button_button_down():
 	blackscreen = true

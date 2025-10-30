@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://wsvjujx2e1ml"]
+
+[ext_resource type="PackedScene" uid="uid://d25js0wc8rmp2" path="res://powerup.tscn" id="1_nbtnn"]
+[ext_resource type="Script" uid="uid://gah2j0q3nv4u" path="res://scripts/toolbox_powerup.gd" id="2_87xm1"]
+[ext_resource type="Texture2D" uid="uid://crkel74wjdfre" path="res://sprites/toolbox.svg" id="2_och10"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_87xm1"]
+size = Vector2(34, 27)
+
+[node name="powerup" instance=ExtResource("1_nbtnn")]
+script = ExtResource("2_87xm1")
+maxHealthIncrease = 20
+additionalHealingFactor = 0.1
+movementSpeed = 3.0
+
+[node name="glowSprite" parent="." index="0"]
+scale = Vector2(0.124555, 0.124555)
+
+[node name="sprite" parent="." index="1"]
+texture = ExtResource("2_och10")
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_87xm1")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="3"]
+scale = Vector2(3.6, 3.6)
