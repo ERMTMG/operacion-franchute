@@ -10,6 +10,8 @@ var myScene: PackedScene
 @export var movementSpeed: float = 2.0
 @export var turningStrength: float = 0.033
 
+@onready var powerUpSfx: AudioStream = preload("res://sounds/powerup.wav")
+
 var direction: float
 var constant_turn: float = 0
 const TURN_CHANGE_RARITY = 30
@@ -77,7 +79,7 @@ func handle_animation() -> void:
 func collected_by_player(player: Player) -> void:
 	if !is_queued_for_deletion():
 		player.collect_powerup(self)
-	#...?
+	Global.GAME_MANAGER.play_sfx(powerUpSfx)
 	queue_free()
 
 func _physics_process(delta: float) -> void:
@@ -87,7 +89,7 @@ func _physics_process(delta: float) -> void:
 		movementMode = MOVE_AROUND_ON_CENTER
 	for body in get_overlapping_bodies():
 		if body is Player:
-			collected_by_player(body)
+			collected_by_player(body as Player)
 	if framesOffScreen >= 0:
 		framesOffScreen += 1
 		if framesOffScreen >= OFF_SCREEN_FRAME_LIMIT:

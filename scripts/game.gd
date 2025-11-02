@@ -270,6 +270,10 @@ func handle_offscreen_player_warning() -> void:
 
 
 func spawn_powerups(time: float):
+	if randi() % 300 == 0:
+		spawn_toolbox_powerup()
+	if randi() % 301 == 0:
+		spawn_powerup(smallMoneybag)
 	"""if time < 60:
 		if randi() % 600 == 0:
 			spawn_ammo_box()

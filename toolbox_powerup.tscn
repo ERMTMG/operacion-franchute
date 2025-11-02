@@ -14,7 +14,7 @@ additionalHealingFactor = 0.1
 movementSpeed = 3.0
 
 [node name="glowSprite" parent="." index="0"]
-scale = Vector2(0.124555, 0.124555)
+scale = Vector2(0.16726, 0.16726)
 
 [node name="sprite" parent="." index="1"]
 texture = ExtResource("2_och10")
@@ -24,4 +24,4 @@ position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_87xm1")
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="3"]
-scale = Vector2(3.6, 3.6)
+scale = Vector2(4.8, 4.8)
