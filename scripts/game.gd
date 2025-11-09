@@ -46,6 +46,8 @@ const PlayerScene: PackedScene = preload("res://player.tscn")
 @onready var largeMoneybag: PackedScene = preload("res://large_moneybag_powerup.tscn")
 @onready var toolBoxPowerup: PackedScene = preload("res://toolbox_powerup.tscn")
 #
+@onready var tutorialPopupScene: PackedScene = load("res://tutorial_screen.tscn")
+
 var playerdamagesignal = Callable(self, "_on_character_body_2d_damaged")
 var playerdeadsignal = Callable(self, "_on_character_body_2d_dead")
 const PAUSE_SHADER: Shader = preload("res://paused_screen_filter.gdshader")
@@ -204,7 +206,7 @@ func _ready():
 	
 
 
-func start_game():
+func start_game(tutorial: bool = true):
 	if(Settings.PAUSE_SCREEN_FILTER_ENABLED):
 		(pauseMenuShaderScreen.material as ShaderMaterial).shader = PAUSE_SHADER
 		pauseMenuShaderScreen.show()
@@ -222,11 +224,19 @@ func start_game():
 	for node in get_children():
 		if node is Enemy:
 			node.queue_free()
+	Global.INGAME = true
+	enemySpawnTimer.stop()
+	if tutorial:
+		var tutorialScreen := tutorialPopupScene.instantiate() as TutorialPopupClass
+		tutorialScreen.position = Vector2(576.0, -200)
+		HUD.add_child(tutorialScreen)
+		tutorialScreen.fade_in_to(Vector2(576.0, 324))
+		await tutorialScreen.fading_out
+		
 	var playernode = PlayerScene.instantiate()
 	playernode.connect("damaged", playerdamagesignal)
 	playernode.connect("dead", playerdeadsignal)
 	add_child(playernode)
-	Global.INGAME = true
 	Global.GAMETIME = 0
 	Global.SCORE = 0
 	gameTimer.start()
@@ -270,10 +280,6 @@ func handle_offscreen_player_warning() -> void:
 
 
 func spawn_powerups(time: float):
-	if randi() % 300 == 0:
-		spawn_toolbox_powerup()
-	if randi() % 301 == 0:
-		spawn_powerup(smallMoneybag)
 	"""if time < 60:
 		if randi() % 600 == 0:
 			spawn_ammo_box()

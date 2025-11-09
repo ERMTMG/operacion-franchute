@@ -12,6 +12,7 @@ var PROJECTILECOUNT: int = 0
 const MAXPROJECTILECOUNT: int = 256
 var PLAYERHEALTH: int
 var PLAYERMAXHEALTH: int
+var SHOW_TUTORIAL: bool = true
 enum BuffTypes {
 	AMMO_BUFF = 0,
 	BLUE_LASER_BUFF = 1,
