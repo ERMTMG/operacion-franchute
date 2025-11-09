@@ -63,7 +63,6 @@ emitting = false
 
 [node name="firingSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_4olsx")
-max_polyphony = 16
 bus = &"sfx"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

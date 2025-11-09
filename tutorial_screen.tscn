@@ -17,32 +17,29 @@
 
 [node name="tutorial_popup" type="Control" node_paths=PackedStringArray("quitButton")]
 layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-grow_horizontal = 2
-scale = Vector2(0.3, 0.3)
-mouse_filter = 2
-script = ExtResource("1_mgsld")
-quitButton = NodePath("quit_button")
-
-[node name="screen" type="TextureRect" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -724.5
-offset_top = -705.5
-offset_right = 724.5
-offset_bottom = 705.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+mouse_filter = 2
+script = ExtResource("1_mgsld")
+quitButton = NodePath("screen/quit_button")
+
+[node name="screen" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_b68d8")
 
-[node name="quit_button" type="Button" parent="." node_paths=PackedStringArray("sprite")]
+[node name="quit_button" type="Button" parent="screen" node_paths=PackedStringArray("sprite")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -50,9 +47,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -257.0
-offset_top = 509.667
+offset_top = -195.833
 offset_right = 257.0
-offset_bottom = 656.667
+offset_bottom = -48.8334
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_svw03")
@@ -64,9 +61,9 @@ flat = true
 script = ExtResource("3_b68d8")
 sprite = NodePath("Sprite2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="quit_button"]
+[node name="Sprite2D" type="Sprite2D" parent="screen/quit_button"]
 position = Vector2(257, 73.3333)
 texture = ExtResource("3_svw03")
 
-[connection signal="pressed" from="quit_button" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="quit_button" to="quit_button" method="_on_pressed"]
+[connection signal="pressed" from="screen/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="screen/quit_button" to="screen/quit_button" method="_on_pressed"]

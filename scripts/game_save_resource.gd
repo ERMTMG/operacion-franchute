@@ -12,10 +12,12 @@ class_name GameSaveResource
 @export var ENEMY_HP_BARS_ENABLED: bool = true
 @export var RAINBOW_HP_BARS_ENABLED: bool = false
 @export var PAUSE_SCREEN_FILTER_ENABLED: bool = true
+@export var ON_SCREEN_PAUSE_BUTTON_ENABLED: bool = true
 @export var FANCY_SCORE_COUNTER_ENABLED: bool = true
 
 # GLOBALS (that should be kept across games)
-var HIGH_SCORE: int = 0
+@export var HIGH_SCORE: int = 0
+@export var SHOW_TUTORIAL: bool = true
 
 # PLAYER SKIN INFO
 @export var CURRENT_SKIN_SHOWING: int = 0

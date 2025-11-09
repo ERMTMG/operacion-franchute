@@ -18,7 +18,8 @@ const SETTINGS_NAMES: Array[StringName] = [
 ]
 
 const RECORDS_NAMES: Array[StringName] = [
-	&"HIGH_SCORE"
+	&"HIGH_SCORE",
+	&"SHOW_TUTORIAL"
 ]
 
 const SKIN_INFO_NAMES: Array[StringName] = [

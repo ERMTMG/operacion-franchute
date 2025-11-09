@@ -228,7 +228,7 @@ func start_game(tutorial: bool = true):
 	enemySpawnTimer.stop()
 	if tutorial:
 		var tutorialScreen := tutorialPopupScene.instantiate() as TutorialPopupClass
-		tutorialScreen.position = Vector2(576.0, -200)
+		tutorialScreen.INITIAL_POSITIION = Vector2(576.0, -200)
 		HUD.add_child(tutorialScreen)
 		tutorialScreen.fade_in_to(Vector2(576.0, 324))
 		await tutorialScreen.fading_out
@@ -247,7 +247,7 @@ func unfade_and_start():
 	menu.visible = false
 	if Settings.ON_SCREEN_PAUSE_BUTTON_ENABLED:
 		pauseButton.show_on_screen()
-	start_game()
+	start_game(Global.SHOW_TUTORIAL)
 
 func spawn_enemies(time: float):
 	var gameTime := Global.GAMETIME

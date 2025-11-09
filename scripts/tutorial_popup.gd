@@ -21,6 +21,7 @@ func fade_out():
 	tween.tween_property(self, "scale", Vector2.ZERO, FADE_TIME)
 	tween.finished.connect(func():
 		queue_free()
+		Global.SHOW_TUTORIAL = false
 	)
 
 func _on_quit_button_pressed() -> void:
