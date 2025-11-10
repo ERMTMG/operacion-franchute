@@ -28,10 +28,10 @@ func _player_skin(textureFilename: String, name: String, points: int, color: boo
 	return PlayerSkinInfo.new(textureFilename, name, points, color, flags)
 
 var PLAYER_SKINS: Array[PlayerSkinInfo] = [ # i wish i could make this a const
-	_player_skin("res://sprites/player_skins/skin1.svg", "VIVA ESPAÑA", 0, false),
+	_player_skin("res://sprites/player_skins/skin4.svg", "PREDETERMINADO", 0, false),
+	_player_skin("res://sprites/player_skins/skin1.svg", "ÉLITE ESPAÑOLA", 0, false),
 	_player_skin("res://sprites/player_skins/skin2.svg", "NAVE BRITÁNICA ELIZABETH III", 0, false),
 	_player_skin("res://sprites/player_skins/skin3.svg", "TRAIDOR", 0, false),
-	_player_skin("res://sprites/player_skins/skin4.svg", "PARTIDO NEUTRAL", 0, false),
 	_player_skin("res://sprites/player_skins/skin5.svg", "LA VERDADERA BANDERA FRANCESA", 0, false),
 	_player_skin("res://sprites/player_skins/skin6.svg", "MONOCROMÁTICO", 0, true),
 	_player_skin("res://sprites/player_skins/skin7.svg", "MITAD Y MITAD", 0, true),
