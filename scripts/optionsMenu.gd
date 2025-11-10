@@ -27,6 +27,7 @@ const POINTS_FOR_RAINBOW_BARS: int = 50000
 	$page2/MarginContainer/VBoxContainer/GridContainer2/Control2/enemyBarsCheck, 
 	$page2/MarginContainer/VBoxContainer/GridContainer2/Control3/rainbowBarCheck, 
 	$page2/MarginContainer/VBoxContainer/GridContainer2/Control4/pauseScreenFilterCheck, 
+	$page2/MarginContainer/VBoxContainer/GridContainer2/Control6/onScreenPauseButtonCheck,
 	$page2/MarginContainer/VBoxContainer/GridContainer2/Control5/fancyScoreCheck
 ]
 @onready var CHECKBOX_SETTINGS: Dictionary[CheckBox, StringName] = {
@@ -38,7 +39,8 @@ const POINTS_FOR_RAINBOW_BARS: int = 50000
 	CHECKBOXES[5]: &"ENEMY_HP_BARS_ENABLED",
 	CHECKBOXES[6]: &"RAINBOW_HP_BARS_ENABLED",
 	CHECKBOXES[7]: &"PAUSE_SCREEN_FILTER_ENABLED",
-	CHECKBOXES[8]: &"FANCY_SCORE_COUNTER_ENABLED"
+	CHECKBOXES[8]: &"ON_SCREEN_PAUSE_BUTTON_ENABLED",
+	CHECKBOXES[9]: &"FANCY_SCORE_COUNTER_ENABLED",
 }
 @onready var SLIDERS: Array[HSlider] = [
 	$page1/MarginContainer/VBoxContainer/GridContainer/musicslider, 
