@@ -13,7 +13,7 @@ const LIGHT_BG: Color = Color.WHITE
 const ChanceArray = Utils.ChanceArray
 var spawningRules: Dictionary[float, Object]
 var spawningTimestampsSorted: Array[float]
-const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_test_3.json"
+const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_spawning_rules_normal.json"
 
 @export var menu: Control 
 @export var redCover: ColorRect 
@@ -361,7 +361,7 @@ func _on_character_body_2d_dead():
 	Global.INGAME = false
 
 func _on_game_timer_timeout():
-	Global.GAMETIME += 0.1
+	Global.GAMETIME += 0.5
 	gameTimer.start()
 	
 func _on_enemy_timer_timeout():

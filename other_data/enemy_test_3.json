@@ -36,7 +36,7 @@
 		]
 	},
 	
-	"1e308": {
+	"100": {
 		"TYPE": "CHOICES",
 		"choices": [
 		{
@@ -97,5 +97,131 @@
 			]
 		}
 		]
+	},
+	"150": {
+	    "TYPE": "CHOICES",
+	    "choices": [
+	    {
+	        "chance": 0.333,
+	        "TYPE": "ENEMYSPAWN",
+	        "enemyType": "winebottle",
+	        "speed": [4.0, 6.5],
+	        "hp": 3,
+	        "size": [0.9, 1.2],
+	        "spinSpeed": [0.03, 0.04],
+	        "direction": "random"
+	    },
+	    {
+	        "chance": 0.333,
+	        "TYPE": "ENEMYSPAWN",
+	        "enemyType": "robossant",
+	        "size": 1,
+	        "hp": [30, 35],
+	        "speed": [1.0, 2.5],
+	        "spinSpeed": [0.0075, 0.0125],
+	        "direction": "random"
+	    },
+	    {
+	        "chance": 0.334,
+	        "TYPE": "CHOICES",
+	        "choices": [
+	        {
+	            "chance": 0.5,
+	            "TYPE": "ENEMYSPAWN",
+	            "count": 2,
+	            "enemyType": "croissant",
+	            "hp": [15, 20],
+	            "size": 1,
+	            "speed": [0.75, 1.5],
+	            "spinSpeed": [0.15, 0.25],
+	            "direction": "random"
+	            
+	        },
+	        {
+	            "chance": 0.5,
+	            "TYPE": "ENEMYSPAWN",
+	            "enemyType": "baguette",
+	            "hp": 20,
+	            "size": [1.0, 1.15],
+	            "speed": [7.5, 10.0],
+	            "spinSpeed": 0,
+	            "direction": "player"
+	        }
+	        ]
+	    }
+	    ]
+	},
+	"1e308": {
+	    "TYPE": "CHOICES",
+	    "choices": [
+	    {
+	        "chance": 0.2,
+	        "TYPE": "ENEMYSPAWN",
+	        "enemyType": "croissant",
+	        "hp": [22,27],
+	        "size": [1.0, 1.25],
+	        "speed": [2.0, 3.5],
+	        "spinSpeed": [0.01, 0.02],
+	        "direction": "random"
+	    },
+	    {
+	        "chance": 0.2,
+	        "TYPE": "ENEMYSPAWN",
+	        "enemyType": "winebottle",
+	        "hp": 3,
+	        "size": [0.9, 1.2],
+	        "speed": [4.0, 6.5],
+	        "spinSpeed": [0.03, 0.04],
+	        "direction": "random"
+	    },
+	    {
+	        "chance": 0.2,
+	        "TYPE": "ENEMYSPAWN",
+	        "enemyType": "croissatan",
+	        "hp": [33, 36],
+	        "size": 1,
+	        "speed": [3.0, 5.0],
+	        "spinSpeed": [0.15, 0.275],
+	        "direction": "random",
+	    },
+	    {
+	        "chance": 0.2,
+	        "TYPE": "ENEMYSPAWN",
+	        "enemyType": "robossant",
+	        "hp": 30,
+	        "size": [1.0, 1.1],
+	        "speed": [1.5, 3.0],
+	        "spinSpeed": [0.075, 0.125],
+	        "direction": "random"
+	    },
+	    {
+	        "chance": 0.2,
+	        "TYPE": "CHOICES",
+	        "choices": [
+	        {
+	            "chance": 0.5,
+	            "TYPE": "ENEMYSPAWN",
+	            "count": 3,
+	            "enemyType": "baguette",
+	            "hp": [20],
+	            "size": 0.75,
+	            "speed": 6,
+	            "spinSpeed": 0,
+	            "direction": "random"
+	            
+	        },
+	        {
+	            "chance": 0.5,
+	            "TYPE": "ENEMYSPAWN",
+	            "enemyType": "baguette",
+	            "hp": 20,
+	            "size": [1.0, 1.2],
+	            "speed": [8.5, 10.0],
+	            "spinSpeed": 0,
+	            "direction": "player"
+	        }
+	        ]
+	    }
+	    ]
 	}
 }
