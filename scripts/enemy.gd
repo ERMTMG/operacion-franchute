@@ -33,7 +33,7 @@ var offScreenFrames: int
 
 var INGAME_SPAWN_AXES: Vector2 = Vector2(900, 600)
 var MENU_SPAWN_AXES: Vector2 = Vector2(1200, 900)
-var OFF_SCREEN_FRAME_LIMIT: int = 180
+var OFF_SCREEN_FRAME_LIMIT: int = 360
 
 var pointedByMouse: bool = false
 

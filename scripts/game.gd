@@ -277,18 +277,37 @@ func handle_offscreen_player_warning() -> void:
 		offScreenIndicator.visible = false
 		if offScreenSound.playing: offScreenSound.stop()
 
+func spawn_health_powerups(time: float):
+	if time >= 60.0:
+		var healthratio: float = 1.0*Global.PLAYERHEALTH / Global.PLAYERMAXHEALTH
+		if healthratio < 0.5:
+			var rarity: int = maxi(500 - roundf(time / 2.0), 120)
+			if randi() % rarity == 0:
+				if  healthratio < 0.25 && randi() % 5 == 0: 
+					spawn_large_heart()
+				else: 
+					spawn_small_heart()
 
+func spawn_buff_powerups(time: float):
+	if time >= 100.0:
+		var rng: int = randi()
+		if rng % 3107 == 0: 
+			spawn_ammo_box()
+		elif rng % 4278 == 0:
+			spawn_blue_laser_beam()
+
+func spawn_point_powerups(time: float):
+	var rarity: int = maxi(1025 - roundf(time/1.5), 250)
+	if randi() % rarity == 0:
+		if randi() % 10 == 0:
+			spawn_powerup(largeMoneybag)
+		else:
+			spawn_powerup(smallMoneybag)
 
 func spawn_powerups(time: float):
-	"""if time < 60:
-		if randi() % 600 == 0:
-			spawn_ammo_box()
-	elif time >= 60:
-		var healthratio = 1.0*Global.PLAYERHEALTH / Global.PLAYERMAXHEALTH
-		if healthratio < 0.5:
-			if randi() % 500 == 0:
-				if randi() % 5 == 0: spawn_large_heart()
-				else: spawn_small_heart()"""
+	spawn_health_powerups(time)
+	spawn_buff_powerups(time)
+	spawn_point_powerups(time)
 
 func _on_loaded_data():
 	highScoreScreen.update_high_score()
@@ -361,12 +380,13 @@ func _on_character_body_2d_dead():
 	Global.INGAME = false
 
 func _on_game_timer_timeout():
-	Global.GAMETIME += 0.5
+	Global.GAMETIME += 0.1
 	gameTimer.start()
 	
 func _on_enemy_timer_timeout():
+	print("new enemy being spawned!")
 	spawn_enemies(Global.GAMETIME)
-	enemySpawnTimer.start(r(3,4))
+	enemySpawnTimer.start(r(4,5))
 
 func _on_button_button_down():
 	blackscreen = true
