@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	and Global.INGAME \
 	and Global.GAME_MANAGER.count_enemies_of_type(SatanicCroissantChunk) < MAX_TOTAL_CHUNKS\
 	and !is_queued_for_deletion():
-		shoot_out_chunks(NUMBER_CHUNKS_SHOT, 0.667*speed, 0.9*spinSpeed, scale.x, 10)
+		shoot_out_chunks(NUMBER_CHUNKS_SHOT, 0.667*speed, 0.9*spinSpeed, scale.x, 4)
 		chunkShootTimer = 0
 
 func die() -> void:
@@ -39,5 +39,5 @@ func die() -> void:
 			(horn2 as AnimatedSprite2D).frame = 1
 		Global.create_vfx_from_node(horn1 as AnimatedSprite2D, global_position)
 		Global.create_vfx_from_node(horn2 as AnimatedSprite2D, global_position)
-		shoot_out_chunks(6, 1.333*speed, spinSpeed, scale.x, 30)
+		shoot_out_chunks(6, 1.333*speed, spinSpeed, scale.x, 5)
 	super()
