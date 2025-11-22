@@ -14,7 +14,3 @@ func die() -> void:
 		Global.create_vfx(largeFlashScene, global_position)
 		split_into_chunks(randi_range(3,6), 1.25*speed, 1.2*spinSpeed, scale.x, 5)
 	super()
-
-func _exit_tree() -> void:
-	super()
-	print("croissant out!")

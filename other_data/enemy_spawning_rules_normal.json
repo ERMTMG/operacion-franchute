@@ -134,7 +134,7 @@
 				"hp": [15, 20],
 				"size": 1,
 				"speed": [0.75, 1.5],
-				"spinSpeed": [0.15, 0.25],
+				"spinSpeed": [0.015, 0.025],
 				"direction": "random"
 				
 			},

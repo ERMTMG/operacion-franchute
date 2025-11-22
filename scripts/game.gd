@@ -222,7 +222,7 @@ func start_game(tutorial: bool = true):
 		fancyScoreCounter.hide()
 		basicScoreCounter.show()
 	for node in get_children():
-		if node is Enemy:
+		if node is Enemy or node is PowerUp:
 			node.queue_free()
 	Global.INGAME = true
 	enemySpawnTimer.stop()
@@ -281,7 +281,7 @@ func spawn_health_powerups(time: float):
 	if time >= 60.0:
 		var healthratio: float = 1.0*Global.PLAYERHEALTH / Global.PLAYERMAXHEALTH
 		if healthratio < 0.5:
-			var rarity: int = maxi(500 - roundf(time / 2.0), 120)
+			var rarity: int = maxi(800 - roundf(time / 2.0), 500)
 			if randi() % rarity == 0:
 				if  healthratio < 0.25 && randi() % 5 == 0: 
 					spawn_large_heart()
@@ -297,7 +297,7 @@ func spawn_buff_powerups(time: float):
 			spawn_blue_laser_beam()
 
 func spawn_point_powerups(time: float):
-	var rarity: int = maxi(1025 - roundf(time/1.5), 250)
+	var rarity: int = maxi(3871 - roundf(time/1.5), 1000)
 	if randi() % rarity == 0:
 		if randi() % 10 == 0:
 			spawn_powerup(largeMoneybag)
