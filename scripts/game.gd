@@ -249,7 +249,7 @@ func unfade_and_start():
 		pauseButton.show_on_screen()
 	start_game(Global.SHOW_TUTORIAL)
 
-func spawn_enemies(time: float):
+func spawn_enemies(time: float) -> Enemy:
 	var gameTime := Global.GAMETIME
 	for timestamp in spawningTimestampsSorted:
 		if timestamp as float > gameTime:
@@ -260,8 +260,9 @@ func spawn_enemies(time: float):
 				  get_enemy_spawn_from_enemy_spawning_chance_array(currentRule)
 			else:
 				spawn = currentRule
-			spawn.spawn_as_child_of(self)
+			return spawn.spawn_as_child_of(self)
 			break # only spawn from the lowest upper bound!
+	return null # unreachable
 
 func handle_offscreen_player_warning() -> void:
 	var player: Player = get_player_node()
@@ -383,10 +384,25 @@ func _on_game_timer_timeout():
 	Global.GAMETIME += 0.1
 	gameTimer.start()
 	
+func spawn_enemies_and_reset_enemy_timer() -> void:
+	var spawned_enemy := spawn_enemies(Global.GAMETIME)
+	var hard_spawn: bool = (spawned_enemy is Croissant or spawned_enemy is RainbowCroissant)
+	
+	var lowerTimeBound: float = minf(4.5 - Global.GAMETIME / 360.0, 3.5)
+	var upperTimeBound: float = minf(6.5 - Global.GAMETIME / 280.0 + randf(), 4.5)
+	if hard_spawn:
+		lowerTimeBound += 2.5 * randf() 
+		upperTimeBound += 3.5 * randf()
+	if Global.ENEMYCOUNT < 10:
+		lowerTimeBound -= 0.5
+		upperTimeBound -= 0.25 
+	elif Global.ENEMYCOUNT > 20:
+		lowerTimeBound += 0.75
+		upperTimeBound += 0.5
+	enemySpawnTimer.start(r(lowerTimeBound, upperTimeBound))
+
 func _on_enemy_timer_timeout():
-	print("new enemy being spawned!")
-	spawn_enemies(Global.GAMETIME)
-	enemySpawnTimer.start(r(4,5))
+	spawn_enemies_and_reset_enemy_timer()
 
 func _on_button_button_down():
 	blackscreen = true
