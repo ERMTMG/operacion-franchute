@@ -18,7 +18,7 @@ func hide_from_menu() -> void:
 	currentTargetPos = HIDDEN_POS
 
 func update_high_score() -> void:
-	text.text = "RÉCORD: %d PUNTOS" % Global.HIGH_SCORE
+	text.text = "RÉCORD: %d PUNTOS\nPOR %s" % [Global.HIGH_SCORE, Global.HIGH_SCORE_HOLDER_NAME]
 
 func _physics_process(delta: float) -> void:
 	if position != currentTargetPos:

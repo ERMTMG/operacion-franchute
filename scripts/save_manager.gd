@@ -19,6 +19,7 @@ const SETTINGS_NAMES: Array[StringName] = [
 
 const RECORDS_NAMES: Array[StringName] = [
 	&"HIGH_SCORE",
+	&"HIGH_SCORE_HOLDER_NAME",
 	&"SHOW_TUTORIAL"
 ]
 

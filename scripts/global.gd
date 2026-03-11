@@ -4,6 +4,7 @@ var INGAME: bool
 var GAMETIME: float = 0
 var SCORE: int = 0
 var HIGH_SCORE: int = 0
+var HIGH_SCORE_HOLDER_NAME: String
 var ENEMYCOUNT: int = 0
 const MAXENEMYCOUNT: int = 128
 var POWERUPCOUNT: int = 0

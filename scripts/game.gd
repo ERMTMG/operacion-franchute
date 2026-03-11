@@ -34,6 +34,7 @@ const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_spawning_rule
 @export var fancyScoreCounter: ScoreLabel
 @export var beforeQuittingPopup: TextureRect
 @export var pauseButton: PauseButtonClass
+@export var highScoreNameInput: HighScoreNameInput
 const PlayerScene: PackedScene = preload("res://player.tscn")
 
 #POWERUPS
@@ -319,8 +320,6 @@ func fade_in_menu():
 	gameStartButton.moveup()
 	menu.modulate.a = 0.0
 	menu.visible = true
-	if Global.HIGH_SCORE > 0:
-		highScoreScreen.show_on_menu()
 
 func _physics_process(delta: float) -> void:
 	timer += 1
@@ -376,9 +375,12 @@ func _on_character_body_2d_dead():
 	for node in get_children():
 		if node is Enemy: 
 			node.die()
-	if Global.check_high_score():
-		highScoreScreen.update_high_score()
 	Global.INGAME = false
+	if Global.check_high_score():
+		highScoreNameInput.visible = true
+		await highScoreNameInput.closed
+		highScoreScreen.update_high_score()
+		highScoreScreen.show_on_menu()
 
 func _on_game_timer_timeout():
 	Global.GAMETIME += 0.1

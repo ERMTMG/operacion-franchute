@@ -17,6 +17,7 @@ class_name GameSaveResource
 
 # GLOBALS (that should be kept across games)
 @export var HIGH_SCORE: int = 0
+@export var HIGH_SCORE_HOLDER_NAME: String = ""
 @export var SHOW_TUTORIAL: bool = true
 
 # PLAYER SKIN INFO
