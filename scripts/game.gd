@@ -377,7 +377,9 @@ func _on_character_body_2d_dead():
 			node.die()
 	Global.INGAME = false
 	if Global.check_high_score():
-		highScoreNameInput.visible = true
+		await get_tree().create_timer(1.5).timeout
+		self.play_sfx(load("res://sounds/victory_loud.mp3"), false, 1.66)
+		highScoreNameInput.show()
 		await highScoreNameInput.closed
 		highScoreScreen.update_high_score()
 		highScoreScreen.show_on_menu()
