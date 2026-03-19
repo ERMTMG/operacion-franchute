@@ -377,12 +377,14 @@ func _on_character_body_2d_dead():
 			node.die()
 	Global.INGAME = false
 	if Global.check_high_score():
+		gameStartButton.disabled = true
 		await get_tree().create_timer(1.5).timeout
 		self.play_sfx(load("res://sounds/victory_loud.mp3"), false, 1.66)
 		highScoreNameInput.show()
 		await highScoreNameInput.closed
 		highScoreScreen.update_high_score()
 		highScoreScreen.show_on_menu()
+		gameStartButton.disabled = false
 
 func _on_game_timer_timeout():
 	Global.GAMETIME += 0.1
