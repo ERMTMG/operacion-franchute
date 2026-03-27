@@ -3,12 +3,19 @@ extends TextureRect
 var gameManager: Game = Global.GAME_MANAGER
 const MENU_SHOW_TRANSITION_WEIGHT: float = 0.5
 const SKIN_PREVIEW_ROTATION_SPEED: float = 1
+
+const CLOSE_BUTTON_DEFAULT_SIZE: float = 0.087
+const CLOSE_BUTTON_HOVERED_SIZE: float = 0.094
+
 @export var animationPlayer: AnimationPlayer
 @export var skinNameLabel: RichTextLabel
 @export var skinPreview: TextureRect
 @export var skinPreviewSparkles: GPUParticles2D
 @export var selectButton: SkinSelectButton
 @export var colorMenu: TextureRect
+@export var quitButton: Button
+@export var quitButtonSprite: Sprite2D
+
 const LABEL_POS: Vector2 = Vector2(194,49)
 const SKIN_MENU_SOUNDS: Dictionary[StringName, AudioStream] = {
 	&"WINDOW_POPUP": preload("res://sounds/menu/window_popup.mp3"),
@@ -58,6 +65,17 @@ func _physics_process(delta: float) -> void:
 		skinPreview.material.set_shader_parameter("Shift_Hue", hue)
 	else:
 		skinPreview.material.set_shader_parameter("Shift_Hue", PlayerSkins.ACTUAL_SKIN_HUE_SHIFT)
+		
+	if quitButton.is_hovered():
+		quitButtonSprite.scale = quitButtonSprite.scale.lerp(
+			CLOSE_BUTTON_HOVERED_SIZE * Vector2.ONE, 
+			MENU_SHOW_TRANSITION_WEIGHT
+		)
+	else:
+		quitButtonSprite.scale = quitButtonSprite.scale.lerp(
+			CLOSE_BUTTON_DEFAULT_SIZE * Vector2.ONE,
+			MENU_SHOW_TRANSITION_WEIGHT
+		)
 
 func _on_skin_menu_button_pressed() -> void:
 	if Global.CURRENT_MENU_SHOWING == Global.NONE:

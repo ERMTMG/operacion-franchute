@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="operación franchute"
+config/name="Operación Franchute"
 run/main_scene="res://screen.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://qhufmbb3hghw"
 
 [autoload]
 
@@ -25,7 +25,7 @@ SaveSystem="*res://addons/save_system/save_system.gd"
 
 [display]
 
-window/size/resizable=false
+window/stretch/mode="canvas_items"
 
 [dotnet]
 

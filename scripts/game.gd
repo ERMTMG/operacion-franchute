@@ -248,7 +248,7 @@ func unfade_and_start():
 	menu.visible = false
 	if Settings.ON_SCREEN_PAUSE_BUTTON_ENABLED:
 		pauseButton.show_on_screen()
-	start_game(Global.SHOW_TUTORIAL)
+	start_game(true)
 
 func spawn_enemies(time: float) -> Enemy:
 	var gameTime := Global.GAMETIME
@@ -380,11 +380,11 @@ func _on_character_body_2d_dead():
 		gameStartButton.disabled = true
 		await get_tree().create_timer(1.5).timeout
 		self.play_sfx(load("res://sounds/victory_loud.mp3"), false, 1.66)
-		highScoreNameInput.show()
+		highScoreNameInput.open()
 		await highScoreNameInput.closed
 		highScoreScreen.update_high_score()
-		highScoreScreen.show_on_menu()
 		gameStartButton.disabled = false
+	highScoreScreen.show_on_menu()
 
 func _on_game_timer_timeout():
 	Global.GAMETIME += 0.1

@@ -5,10 +5,15 @@ var gameManager: Game = Global.GAME_MANAGER
 @export var optionsMenuPages: Array[Control]
 @export var animationPlayer: AnimationPlayer
 @export var saveConfirmationPopup: TextureRect
+@export var quitButton: Button
+@export var quitButtonSprite: Sprite2D
+
 var currentlyActivePage: int = 0
 @onready var musicBusID = AudioServer.get_bus_index("music")
 @onready var sfxBusID = AudioServer.get_bus_index("sfx")
 const MENU_SHOW_TRANSITION_WEIGHT: float = 0.5
+const CLOSE_BUTTON_DEFAULT_SIZE: float = 0.079
+const CLOSE_BUTTON_HOVERED_SIZE: float = 0.086
 const MENU_SOUNDS: Dictionary[StringName, AudioStream] = {
 	&"OPTIONS_GEAR": preload("res://sounds/menu/options_gear.mp3"),
 	&"WINDOW_POPUP": preload("res://sounds/menu/window_popup.mp3"),
@@ -68,6 +73,16 @@ func _physics_process(delta):
 	rainbowBarCheck.disabled = rainbowBarsLocked
 	rainbowBarCheckLock.visible = rainbowBarsLocked
 	
+	if quitButton.is_hovered():
+		quitButtonSprite.scale = quitButtonSprite.scale.lerp(
+			CLOSE_BUTTON_HOVERED_SIZE * Vector2.ONE, 
+			MENU_SHOW_TRANSITION_WEIGHT
+		)
+	else:
+		quitButtonSprite.scale = quitButtonSprite.scale.lerp(
+			CLOSE_BUTTON_DEFAULT_SIZE * Vector2.ONE,
+			MENU_SHOW_TRANSITION_WEIGHT
+		)
 
 
 func _on_optionsbutton_pressed():
