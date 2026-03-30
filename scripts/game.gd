@@ -27,7 +27,6 @@ const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_spawning_rule
 @export var backgroundSprite: AnimatedSprite2D
 @export var highScoreScreen: HighScoreScreenClass
 @export var offScreenIndicator: Sprite2D
-@export var offScreenSound: AudioStreamPlayer
 @export var HUD: CanvasLayer
 @export var mousePointerCollision: Area2D
 @export var basicScoreCounter: Label
@@ -273,11 +272,8 @@ func handle_offscreen_player_warning() -> void:
 		offScreenIndicator.position = Vector2.ZERO
 		offScreenIndicator.rotation = (playerScreenPosition - offScreenIndicator.global_position).angle()
 		offScreenIndicator.position = (playerScreenPosition - offScreenIndicator.global_position)*0.75
-	
-		if !offScreenSound.playing: offScreenSound.play()
 	else:
 		offScreenIndicator.visible = false
-		if offScreenSound.playing: offScreenSound.stop()
 
 func spawn_health_powerups(time: float):
 	if time >= 60.0:
@@ -334,7 +330,6 @@ func _physics_process(delta: float) -> void:
 	backgroundSprite.scale = 0.47/(camera.zoom.x + 0.33)*Vector2.ONE
 	if Global.INGAME == false:
 		offScreenIndicator.visible = false
-		if offScreenSound.playing: offScreenSound.stop()
 		if menu.modulate.a != 1.0:
 			menu.modulate.a = move_toward(menu.modulate.a, 1.0,0.05)
 		camera.zoom.x += (0.66 - camera.zoom.x)*0.01
