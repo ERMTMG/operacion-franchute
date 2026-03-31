@@ -247,7 +247,7 @@ func unfade_and_start():
 	menu.visible = false
 	if Settings.ON_SCREEN_PAUSE_BUTTON_ENABLED:
 		pauseButton.show_on_screen()
-	start_game(true)
+	start_game(Global.SHOW_TUTORIAL)
 
 func spawn_enemies(time: float) -> Enemy:
 	var gameTime := Global.GAMETIME
@@ -414,7 +414,7 @@ func _on_menu_timer_timeout():
 
 func kill_player() -> void:
 	var player: Player = get_player_node()
-	if player.deathTimer == player.NOT_DEAD:
+	if player != null && player.deathTimer == player.NOT_DEAD:
 		player.die()
 
 func get_foreground_layer() -> CanvasLayer:
@@ -427,5 +427,9 @@ func ask_save_confirmation_before_quitting() -> void:
 
 func _on_pause_button_pressed() -> void:
 	pauseManager.pause_game()
-	await pauseManager.unpaused
+
+func _on_pause_manager_paused() -> void:
+	pauseButton.hide_from_screen()
+	
+func _on_pause_manager_unpaused() -> void:
 	pauseButton.show_on_screen()
