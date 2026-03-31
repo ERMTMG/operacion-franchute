@@ -221,9 +221,7 @@ func start_game(tutorial: bool = true):
 	else:
 		fancyScoreCounter.hide()
 		basicScoreCounter.show()
-	for node in get_children():
-		if node is Enemy or node is PowerUp:
-			node.queue_free()
+	
 	Global.INGAME = true
 	enemySpawnTimer.stop()
 	if tutorial:
@@ -239,6 +237,9 @@ func start_game(tutorial: bool = true):
 	add_child(playernode)
 	Global.GAMETIME = 0
 	Global.SCORE = 0
+	for node in get_children():
+		if node is Enemy or node is PowerUp:
+			node.queue_free()
 	gameTimer.start()
 	enemySpawnTimer.start(r(0,1.0))
 
