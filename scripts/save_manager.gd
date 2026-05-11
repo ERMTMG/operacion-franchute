@@ -3,6 +3,7 @@ extends Node
 class_name SaveManager
 
 const SETTINGS_NAMES: Array[StringName] = [
+	&"FULL_SCREEN_ENABLED",
 	&"MUSIC_VOLUME",
 	&"SFX_VOLUME",
 	&"SCREEN_FLASH_ENABLED",
@@ -72,8 +73,6 @@ static func _load_settings(gameSave: Dictionary) -> void:
 	for setting in SETTINGS_NAMES:
 		if setting in gameSave:
 			var settingValue = gameSave[setting]
-			if setting == &"ON_SCREEN_PAUSE_BUTTON_ENABLED":
-				print("setting ospbe to ", settingValue)
 			Settings.set(setting, settingValue)
 		else:
 			push_warning("Setting " + setting + " not found in save data. Might be corrupted")

@@ -2,6 +2,7 @@ extends Resource
 class_name GameSaveResource
 
 # SETTINGS
+@export var FULL_SCREEN_ENABLED: bool = false
 @export var MUSIC_VOLUME: float = 1.0
 @export var SFX_VOLUME: float = 1.0
 @export var SCREEN_FLASH_ENABLED: bool = true

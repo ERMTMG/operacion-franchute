@@ -1,5 +1,12 @@
 extends Node
 
+@export var FULL_SCREEN_ENABLED: bool = false:
+	set(value):
+		FULL_SCREEN_ENABLED = value
+		if value:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 @export var MUSIC_VOLUME: float = 1.0
 @export var SFX_VOLUME: float = 1.0
 @export var SCREEN_FLASH_ENABLED: bool = true
@@ -18,7 +25,6 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

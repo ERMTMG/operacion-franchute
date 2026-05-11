@@ -24,6 +24,7 @@ const MENU_SOUNDS: Dictionary[StringName, AudioStream] = {
 
 const POINTS_FOR_RAINBOW_BARS: int = 50000
 @onready var CHECKBOXES: Array[CheckBox] = [
+	$page1/MarginContainer/VBoxContainer/GridContainer/Control/fullScreenCheck,
 	$page1/MarginContainer/VBoxContainer/GridContainer2/Control/screenFlashCheck, 
 	$page1/MarginContainer/VBoxContainer/GridContainer2/Control2/enemyFlashCheck, 
 	$page1/MarginContainer/VBoxContainer/GridContainer2/Control3/screenShakeCheck, 
@@ -36,16 +37,17 @@ const POINTS_FOR_RAINBOW_BARS: int = 50000
 	$page2/MarginContainer/VBoxContainer/GridContainer2/Control5/fancyScoreCheck
 ]
 @onready var CHECKBOX_SETTINGS: Dictionary[CheckBox, StringName] = {
-	CHECKBOXES[0]: &"SCREEN_FLASH_ENABLED",
-	CHECKBOXES[1]: &"ENEMY_FLASH_ENABLED",
-	CHECKBOXES[2]: &"SCREEN_SHAKE_ENABLED",
-	CHECKBOXES[3]: &"VFX_ENABLED",
-	CHECKBOXES[4]: &"CHRONOMETER_UNITS_MIN_SEC",
-	CHECKBOXES[5]: &"ENEMY_HP_BARS_ENABLED",
-	CHECKBOXES[6]: &"RAINBOW_HP_BARS_ENABLED",
-	CHECKBOXES[7]: &"PAUSE_SCREEN_FILTER_ENABLED",
-	CHECKBOXES[8]: &"ON_SCREEN_PAUSE_BUTTON_ENABLED",
-	CHECKBOXES[9]: &"FANCY_SCORE_COUNTER_ENABLED",
+	CHECKBOXES[0]: &"FULL_SCREEN_ENABLED",
+	CHECKBOXES[1]: &"SCREEN_FLASH_ENABLED",
+	CHECKBOXES[2]: &"ENEMY_FLASH_ENABLED",
+	CHECKBOXES[3]: &"SCREEN_SHAKE_ENABLED",
+	CHECKBOXES[4]: &"VFX_ENABLED",
+	CHECKBOXES[5]: &"CHRONOMETER_UNITS_MIN_SEC",
+	CHECKBOXES[6]: &"ENEMY_HP_BARS_ENABLED",
+	CHECKBOXES[7]: &"RAINBOW_HP_BARS_ENABLED",
+	CHECKBOXES[8]: &"PAUSE_SCREEN_FILTER_ENABLED",
+	CHECKBOXES[9]: &"ON_SCREEN_PAUSE_BUTTON_ENABLED",
+	CHECKBOXES[10]: &"FANCY_SCORE_COUNTER_ENABLED",
 }
 @onready var SLIDERS: Array[HSlider] = [
 	$page1/MarginContainer/VBoxContainer/GridContainer/musicslider, 
@@ -164,6 +166,12 @@ func _on_fancy_score_check_toggled(toggled_on: bool) -> void:
 	animationPlayer.play("RESET")
 	animationPlayer.play("fancyScoreButtonPress")
 
+func _on_full_screen_check_toggled(toggled_on: bool) -> void:
+	Settings.FULL_SCREEN_ENABLED = toggled_on
+	gameManager.play_sfx(MENU_SOUNDS["CHECKBOX_TAP"])
+	animationPlayer.play("RESET")
+	animationPlayer.play("fullScreenButtonPress")
+		
 func _on_button_switch_page_right_pressed() -> void:
 	optionsMenuPages[currentlyActivePage].visible = false
 	currentlyActivePage = (currentlyActivePage + 1) % optionsMenuPages.size()

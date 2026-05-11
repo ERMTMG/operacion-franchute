@@ -13,6 +13,8 @@ config_version=5
 config/name="Operación Franchute"
 run/main_scene="res://screen.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/bg_color=Color(0.165468, 0.101052, 0.250777, 1)
+boot_splash/image="uid://dqngftnq35wb1"
 config/icon="uid://qhufmbb3hghw"
 
 [autoload]
