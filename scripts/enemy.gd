@@ -37,6 +37,8 @@ var OFF_SCREEN_FRAME_LIMIT: int = 360
 
 var pointedByMouse: bool = false
 
+signal died(who: Enemy)
+
 func _ready() -> void:
 	assert(flashAnim.has_animation("RESET") && flashAnim.has_animation("flash"))
 	assert(get_parent() is Game)
@@ -136,7 +138,7 @@ func check_player() -> void:
 
 func hit_by_bullet(bullet: Laser) -> void:
 	health -= bullet.damage
-	Global.SCORE += 1
+	Global.add_score(1)
 	if Settings.ENEMY_FLASH_ENABLED:
 		flashAnim.play("flash")
 	if health < 1:
@@ -145,11 +147,12 @@ func hit_by_bullet(bullet: Laser) -> void:
 
 func die() -> void:
 	if !is_queued_for_deletion():
-		if Global.INGAME: Global.SCORE += scoreAwarded
+		if Global.INGAME: Global.add_score(scoreAwarded)
 		var parent = get_parent()
 		if parent is Game:
 			if screenFlashOnDeath: parent.screen_flash()
 			if screenShakeOnDeath: parent.screen_shake(deathScreenShakeIntensity, deathScreenShakeDuration)
+		died.emit(self)
 	queue_free()
 
 func _exit_tree() -> void:

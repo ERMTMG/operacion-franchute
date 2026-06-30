@@ -22,6 +22,7 @@ const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_spawning_rule
 @export var gameStartButton: GameStartButton
 @export var camera: Camera2D
 @export var pauseManager: PauseManager
+@export var comboManager: ComboManager
 @export var gameTimer: Timer
 @export var enemySpawnTimer: Timer
 @export var backgroundSprite: AnimatedSprite2D
@@ -201,10 +202,9 @@ func _ready():
 	backgroundSprite.modulate = DARK_BG
 	Global.PLAYERHEALTH = 100
 	Global.PLAYERMAXHEALTH = 100
+	comboManager.combo_changed.connect(_on_combo_value_changed)
 	init_enemy_spawning_rules()
 	enemySpawnTimer.start(r(2.0,4.0))
-	
-
 
 func start_game(tutorial: bool = true):
 	if(Settings.PAUSE_SCREEN_FILTER_ENABLED):
@@ -248,7 +248,8 @@ func unfade_and_start():
 	menu.visible = false
 	if Settings.ON_SCREEN_PAUSE_BUTTON_ENABLED:
 		pauseButton.show_on_screen()
-	start_game(Global.SHOW_TUTORIAL)
+		start_game(true)
+	#start_game(Global.SHOW_TUTORIAL)
 
 func spawn_enemies(time: float) -> Enemy:
 	var gameTime := Global.GAMETIME
@@ -388,7 +389,8 @@ func _on_game_timer_timeout():
 	
 func spawn_enemies_and_reset_enemy_timer() -> void:
 	var spawned_enemy := spawn_enemies(Global.GAMETIME)
-	var hard_spawn: bool = (spawned_enemy is Croissant or spawned_enemy is RainbowCroissant)
+	var hard_spawn: bool = (spawned_enemy is Croissatan or spawned_enemy is RainbowCroissant)
+	spawned_enemy.died.connect(_on_enemy_died)
 	
 	var lowerTimeBound: float = minf(4.5 - Global.GAMETIME / 360.0, 3.5)
 	var upperTimeBound: float = minf(6.5 - Global.GAMETIME / 280.0 + randf(), 4.5)
@@ -434,3 +436,9 @@ func _on_pause_manager_paused() -> void:
 	
 func _on_pause_manager_unpaused() -> void:
 	pauseButton.show_on_screen()
+
+func _on_enemy_died(who: Enemy) -> void:
+	comboManager.on_enemy_died()
+
+func _on_combo_value_changed(newValue: int) -> void:
+	Global.SCORE_MULTIPLIER = comboManager.get_current_score_multiplier()

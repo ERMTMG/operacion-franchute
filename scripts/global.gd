@@ -3,6 +3,7 @@ var GLOBAL_TIMER: int = 0
 var INGAME: bool
 var GAMETIME: float = 0
 var SCORE: int = 0
+var SCORE_MULTIPLIER: float = 1.0
 var HIGH_SCORE: int = 0
 var HIGH_SCORE_HOLDER_NAME: String
 var ENEMYCOUNT: int = 0
@@ -61,6 +62,12 @@ func create_vfx(effect: PackedScene, position: Vector2, foreground: bool = false
 			fx.position = position
 			var foregroundLayer: CanvasLayer = GAME_MANAGER.get_foreground_layer()
 			foregroundLayer.add_child(fx)
+
+func add_score(rawScore: int) -> int:
+	var effectiveScore := int(rawScore * SCORE_MULTIPLIER)
+	SCORE += effectiveScore
+	print("incremented score by %d (%d x %f)" % [effectiveScore, rawScore, SCORE_MULTIPLIER])
+	return effectiveScore
 
 func check_high_score() -> bool:
 	if SCORE > HIGH_SCORE: 

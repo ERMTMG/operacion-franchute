@@ -36,14 +36,17 @@ func _physics_process(delta):
 	string += "        HighScore = %d \n" % Global.HIGH_SCORE
 	string += "        GlobalTimer = %d \n" % Global.GLOBAL_TIMER
 	string += "        CurrentMenuShowing = %s \n" % menu_showing_text
-	var root: Node = get_tree().current_scene
-	if root is Game and Global.INGAME:
-		string += "    PlayerPosition = %s\n" % root.get_player_position()
-	if root.get_node("Camera2D") is Camera2D:
-		string += "    CameraZoom = %.5f\n" % root.get_node("Camera2D").zoom.x
-	string += "    Timers:\n"
-	if root.get_node("GameTimer") is Timer:
-		string += "        GameTimerValue = %.3f\n" % root.get_node("GameTimer").time_left
-	if root.get_node("EnemyTimer") is Timer:
-		string += "        EnemyTimerValue = %.3f\n" % root.get_node("EnemyTimer").time_left
+	var root: Node = get_tree().current_scene as Game
+	if root != null:
+		if Global.INGAME:
+			string += "    PlayerPosition = %s\n" % root.get_player_position()
+		if root.get_node("Camera2D") is Camera2D:
+			string += "    CameraZoom = %.5f\n" % root.get_node("Camera2D").zoom.x
+		string += "    Timers:\n"
+		if root.get_node("GameTimer") is Timer:
+			string += "        GameTimerValue = %.3f\n" % root.get_node("GameTimer").time_left
+		if root.get_node("EnemyTimer") is Timer:
+			string += "        EnemyTimerValue = %.3f\n" % root.get_node("EnemyTimer").time_left
+		string += "        ComboScoreMultiplier = %.2f\n" % root.comboManager.get_current_score_multiplier()
+		string += "        ComboTimeLeft = %.2f s\n" % root.comboManager.get_current_combo_time_left()
 	text = string 

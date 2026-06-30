@@ -150,7 +150,7 @@ func collect_powerup(powerUp: PowerUp) -> void:
 	elif powerUp is PointsPowerUp:
 		Global.GAME_MANAGER.play_sfx(powerUpSound)
 		Global.GAME_MANAGER.play_sfx(moneyClink)
-		Global.SCORE += powerUp.pointsGiven
+		Global.add_score(powerUp.pointsGiven)
 	elif powerUp is ToolBoxPowerUp:
 		var maxHealthIncrease: int = (powerUp as ToolBoxPowerUp).maxHealthIncrease
 		var additionalHealing: float = (powerUp as ToolBoxPowerUp).additionalHealingFactor
