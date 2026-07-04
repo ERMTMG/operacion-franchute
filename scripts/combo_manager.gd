@@ -34,7 +34,7 @@ func _ready() -> void:
 func _set_combo(comboValue: int) -> void:
 	if comboValue > MAX_COMBO or comboValue < 0: return
 	_currentCombo = comboValue
-	_comboTimer.wait_time = _get_current_combo_time_window()
+	_comboTimer.wait_time = get_current_combo_time_window()
 	combo_changed.emit(comboValue)
 	_comboTimer.stop()
 
@@ -50,7 +50,7 @@ func _on_combo_timer_timeout() -> void:
 	_set_combo(0)
 	
 
-func _get_current_combo_time_window() -> float:
+func get_current_combo_time_window() -> float:
 	return COMBO_DATA[_currentCombo].timeWindowSecs
 
 func get_current_score_multiplier() -> float:

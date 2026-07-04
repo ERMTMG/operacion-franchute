@@ -66,7 +66,6 @@ func create_vfx(effect: PackedScene, position: Vector2, foreground: bool = false
 func add_score(rawScore: int) -> int:
 	var effectiveScore := int(rawScore * SCORE_MULTIPLIER)
 	SCORE += effectiveScore
-	print("incremented score by %d (%d x %f)" % [effectiveScore, rawScore, SCORE_MULTIPLIER])
 	return effectiveScore
 
 func check_high_score() -> bool:

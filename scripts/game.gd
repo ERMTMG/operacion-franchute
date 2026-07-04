@@ -28,6 +28,7 @@ const ENEMY_SPAWN_RULES_FILENAME: String = "res://other_data/enemy_spawning_rule
 @export var backgroundSprite: AnimatedSprite2D
 @export var highScoreScreen: HighScoreScreenClass
 @export var offScreenIndicator: Sprite2D
+@export var comboIndicator: ComboIndicator
 @export var HUD: CanvasLayer
 @export var mousePointerCollision: Area2D
 @export var basicScoreCounter: Label
@@ -203,6 +204,7 @@ func _ready():
 	Global.PLAYERHEALTH = 100
 	Global.PLAYERMAXHEALTH = 100
 	comboManager.combo_changed.connect(_on_combo_value_changed)
+	comboManager.combo_changed.connect(comboIndicator._on_combo_changed)
 	init_enemy_spawning_rules()
 	enemySpawnTimer.start(r(2.0,4.0))
 
