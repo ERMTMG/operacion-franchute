@@ -92,12 +92,11 @@ class EnemySpawn:
 			output.append(currEnemy)
 		return output
 	
-	func spawn_as_child_of(node: Node) -> Enemy:
-		var returned_enemy: Enemy = null
+	func spawn_as_child_of(node: Node) -> Array[Enemy]:
+		var enemiesToSpawn := self.get_enemies()
 		for enemy in self.get_enemies():
 			node.add_child(enemy)
-			returned_enemy = enemy
-		return returned_enemy 
+		return enemiesToSpawn
 		
 static func get_enemy_spawn_from_enemy_spawning_chance_array(chanceArray: Utils.ChanceArray) -> EnemySpawn:
 	var obj: Object = chanceArray.get_random()

@@ -46,7 +46,7 @@ func split_into_rainbow_chunks(number: int, speed: float, spin: float, size: flo
 		else:
 			push_error("bruh this ain't an enemy")
 			
-func die() -> void:
+func die(_omitSignal: bool = false) -> void:
 	if !is_queued_for_deletion():
 		Global.create_vfx(largeFlash, global_position)
 		Global.create_vfx(colorFlash, global_position + Vector2.from_angle(randf() * TAU) * 120 * randf())
@@ -55,7 +55,7 @@ func die() -> void:
 		_play_sound(backgroundBlast, false, 1.25)
 		_play_sound(blastSound, true)
 		split_into_rainbow_chunks(randi_range(5,7), 1.5 * speed, spinSpeed, 1.1*scale.x, 15)
-	super()
+	super(_omitSignal)
 
 func _physics_process(delta: float) -> void:
 	super(delta)

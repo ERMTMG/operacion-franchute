@@ -18,11 +18,11 @@ func wrap_around() -> void:
 	super()
 	print("Camembert wheel wrapping around!")
 
-func die() -> void:
+func die(_omitSignal: bool = false) -> void:
 	if !is_queued_for_deletion():
 		split_into_slices(NUM_SLICES_SPLIT, 1.333*speed, 0, scale.x, SLICES_HP)
 		Global.create_vfx(largeFlashScene, global_position)
 		Global.create_vfx(raysScene, global_position)
 		_play_sound(blastSound, true)
 		_play_sound(backgroundBlast, false, 1.25)
-	super()
+	super(_omitSignal)

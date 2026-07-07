@@ -8,17 +8,16 @@ class ComboEntry:
 		self.timeWindowSecs = timeWindowSecs;
 		self.scoreMultiplier = scoreMultiplier;
 
-const MAX_COMBO := 8
+const MAX_COMBO := 7
 static var COMBO_DATA: Dictionary[int, ComboEntry] = {
 	0: ComboEntry.new(3.0, 1.00),
-	1: ComboEntry.new(6.0, 1.10),
-	2: ComboEntry.new(6.0, 1.15),
-	3: ComboEntry.new(5.5, 1.20),
-	4: ComboEntry.new(5.5, 1.25),
-	5: ComboEntry.new(5.0, 1.30),
-	6: ComboEntry.new(4.5, 1.35),
-	7: ComboEntry.new(4.0,1.40),
-	8: ComboEntry.new(3.5, 1.50)
+	1: ComboEntry.new(5.0, 1.10),
+	2: ComboEntry.new(5.0, 1.15),
+	3: ComboEntry.new(4.75, 1.20),
+	4: ComboEntry.new(4.5, 1.30),
+	5: ComboEntry.new(4.0, 1.40),
+	6: ComboEntry.new(3.5, 1.50),
+	7: ComboEntry.new(3.25, 1.75),
 }
 
 static func _static_init() -> void:
@@ -45,6 +44,9 @@ func on_enemy_died() -> void:
 	if not _comboTimer.is_stopped():
 		_increment_combo()
 	_comboTimer.start()
+
+func on_weak_enemy_died(timeIncrement: float) -> void:
+	_comboTimer.start(_comboTimer.time_left + timeIncrement)
 
 func _on_combo_timer_timeout() -> void:
 	_set_combo(0)

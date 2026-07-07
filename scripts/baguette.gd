@@ -19,11 +19,11 @@ func wrap_around() -> void:
 	global_position = -global_position \
 		+ randi_range(50, 100) * Vector2.from_angle(direction + factor*PI/2) #lateral displacement
 
-func die() -> void:
+func die(_omitSignal: bool = false) -> void:
 	if !is_queued_for_deletion():
 		_play_sound(blastSound, true)
 		Global.create_vfx(raysScene, global_position)
 		for i in range(-3, 4):
 			var flashPos: Vector2 = global_position + 70*scale.x*i*Vector2.from_angle(direction)
 			Global.create_vfx(largeFlashScene, flashPos)
-	super()
+	super(_omitSignal)

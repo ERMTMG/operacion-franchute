@@ -145,14 +145,14 @@ func hit_by_bullet(bullet: Laser) -> void:
 		die()
 	bullet.hit_enemy()
 
-func die() -> void:
+func die(omitSignal: bool = false) -> void:
 	if !is_queued_for_deletion():
 		if Global.INGAME: Global.add_score(scoreAwarded)
 		var parent = get_parent()
 		if parent is Game:
 			if screenFlashOnDeath: parent.screen_flash()
 			if screenShakeOnDeath: parent.screen_shake(deathScreenShakeIntensity, deathScreenShakeDuration)
-		died.emit(self)
+		if !omitSignal: died.emit(self)
 	queue_free()
 
 func _exit_tree() -> void:

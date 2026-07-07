@@ -253,7 +253,7 @@ func unfade_and_start():
 		start_game(true)
 	#start_game(Global.SHOW_TUTORIAL)
 
-func spawn_enemies(time: float) -> Enemy:
+func spawn_enemies(time: float) -> Array[Enemy]:
 	var gameTime := Global.GAMETIME
 	for timestamp in spawningTimestampsSorted:
 		if timestamp as float > gameTime:
@@ -266,7 +266,7 @@ func spawn_enemies(time: float) -> Enemy:
 				spawn = currentRule
 			return spawn.spawn_as_child_of(self)
 			break # only spawn from the lowest upper bound!
-	return null # unreachable
+	return [] # unreachable
 
 func handle_offscreen_player_warning() -> void:
 	var player: Player = get_player_node()
@@ -373,7 +373,7 @@ func _on_character_body_2d_dead():
 	gameTimer.stop()
 	for node in get_children():
 		if node is Enemy: 
-			node.die()
+			node.die(true)
 	Global.INGAME = false
 	if Global.check_high_score():
 		gameStartButton.disabled = true
@@ -388,11 +388,12 @@ func _on_character_body_2d_dead():
 func _on_game_timer_timeout():
 	Global.GAMETIME += 0.1
 	gameTimer.start()
-	
+
 func spawn_enemies_and_reset_enemy_timer() -> void:
-	var spawned_enemy := spawn_enemies(Global.GAMETIME)
+	var spawned_enemies := spawn_enemies(Global.GAMETIME)
+	if spawned_enemies.size() != 1: return
+	var spawned_enemy := spawned_enemies[0]
 	var hard_spawn: bool = (spawned_enemy is Croissatan or spawned_enemy is RainbowCroissant)
-	spawned_enemy.died.connect(_on_enemy_died)
 	
 	var lowerTimeBound: float = minf(4.5 - Global.GAMETIME / 360.0, 3.5)
 	var upperTimeBound: float = minf(6.5 - Global.GAMETIME / 280.0 + randf(), 4.5)
@@ -439,8 +440,22 @@ func _on_pause_manager_paused() -> void:
 func _on_pause_manager_unpaused() -> void:
 	pauseButton.show_on_screen()
 
-func _on_enemy_died(who: Enemy) -> void:
-	comboManager.on_enemy_died()
+func _on_enemy_died(enemy: Enemy) -> void:
+	if !Global.INGAME: return
+	if enemy is CroissantChunk  \
+	|| enemy is WineBottleShard \
+	|| enemy is CamembertSlice: 
+		if enemy.scale.x < 0.75:
+			comboManager.on_weak_enemy_died(0.1)
+		else:
+			comboManager.on_weak_enemy_died(0.25)
+	else:
+		comboManager.on_enemy_died()
 
 func _on_combo_value_changed(newValue: int) -> void:
 	Global.SCORE_MULTIPLIER = comboManager.get_current_score_multiplier()
+
+func _on_child_entered_tree(node: Node) -> void:
+	if node is Enemy:
+		var spawnedEnemy := node as Enemy
+		spawnedEnemy.died.connect(_on_enemy_died)

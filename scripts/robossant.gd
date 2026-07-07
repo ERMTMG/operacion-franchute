@@ -10,7 +10,7 @@ class_name Robossant
 func split_into_croissants(number: int, speed: float, spin: float, size: float, hp: int) -> void:
 		_split(croissantScene, number, speed, spin, size, hp)
 
-func die() -> void:
+func die(_omitSignal: bool = false) -> void:
 	if !is_queued_for_deletion():
 		Global.create_vfx(largeFlashScene, global_position)
 		_play_sound(blastSoundLoud, true, 1.25)
@@ -21,4 +21,4 @@ func die() -> void:
 		for i in range(4):
 			Global.create_vfx(robossantPieceScene, global_position)
 		split_into_croissants(3, speed, spinSpeed, 0.4*scale.x, 10)
-	super()
+	super(_omitSignal)

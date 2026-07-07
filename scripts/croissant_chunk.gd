@@ -20,7 +20,7 @@ func _ready() -> void:
 	else: scoreAwarded = SMALL_CHUNK_SCORE
 	super()
 
-func die() -> void:
+func die(_omitSignal: bool = false) -> void:
 	if !is_queued_for_deletion():
 		var childrenHP: int = 1
 		if scale.x > MIN_SCALE: 
@@ -30,6 +30,6 @@ func die() -> void:
 		else:
 			_play_sound(smallBlastSound, true)
 		Global.create_vfx(smallFlashScene, global_position)
-	super()
+	super(_omitSignal)
 	
 	

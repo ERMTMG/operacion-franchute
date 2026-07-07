@@ -6,7 +6,7 @@ class_name WineBottleShard
 	preload("res://sounds/shatter_small0.wav"),
 	preload("res://sounds/shatter_small1.wav")
 ]
-func die() -> void:
+func die(_omitSignal: bool = false) -> void:
 	_play_sound(shatterSounds.pick_random(), true)
 	Global.create_vfx(smallFlashScene, global_position)
-	super()
+	super(_omitSignal)

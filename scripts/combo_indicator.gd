@@ -2,31 +2,20 @@ extends Control
 class_name ComboIndicator
 
 @export var animationPlayer: AnimationPlayer
-@export var numberSprite: Sprite2D
+@export var numberSprite: AnimatedSprite2D
 @export var comboManager: ComboManager
 
-const COMBO_NUMBER_SPRITES: Dictionary[int, Texture2D] = {
-	2: preload("res://sprites/combo_indicator/2.svg"),
-	3: preload("res://sprites/combo_indicator/3.svg"),
-	4: preload("res://sprites/combo_indicator/4.svg"),
-	5: preload("res://sprites/combo_indicator/5.svg"),
-	6: preload("res://sprites/combo_indicator/6.svg"),
-	7: preload("res://sprites/combo_indicator/7.svg"),
-	8: preload("res://sprites/combo_indicator/8.svg"),
-}
+@export var COMBO_NUMBER_SPRITES: AnimatedTexture 
 const MIN_COMBO_NUMBER := 2
 const MAX_COMBO_NUMBER := 8
-
-static func _static_init() -> void:
-	COMBO_NUMBER_SPRITES.make_read_only()
 
 var _current_combo_number: int
 
 func set_number_sprite():
 	if _current_combo_number >= MAX_COMBO_NUMBER:
-		numberSprite.texture = COMBO_NUMBER_SPRITES[MAX_COMBO_NUMBER]
+		numberSprite.frame = MAX_COMBO_NUMBER
 	elif _current_combo_number >= MIN_COMBO_NUMBER:
-		numberSprite.texture = COMBO_NUMBER_SPRITES[_current_combo_number]
+		numberSprite.frame = _current_combo_number
 
 func _on_combo_changed(newValue: int):
 	_current_combo_number = newValue + 1

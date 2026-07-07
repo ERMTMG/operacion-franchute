@@ -16,7 +16,7 @@ func _ready() -> void:
 	canWrap = 0 # they don't wrap either
 	super()
 
-func die() -> void:
+func die(_omitSignal: bool = false) -> void:
 	if !is_queued_for_deletion():
 		var largeFlash := largeFlashScene.instantiate() as Sprite2D
 		largeFlash.scale = LARGE_FLASH_SCALE_FACTOR * Vector2.ONE
@@ -26,4 +26,4 @@ func die() -> void:
 			var flashPos := randf() * SMALL_FLASH_FX_MAX_DISTANCE \
 				* Vector2.from_angle(randf() * TAU)
 			Global.create_vfx(smallFlashScene, flashPos + global_position)
-	super()
+	super(_omitSignal)

@@ -16,11 +16,11 @@ func check_player() -> void:
 			body.hurt(damage, true)
 			die()
 
-func die() -> void:
+func die(_omitSignal: bool = false) -> void:
 	if !is_queued_for_deletion():
 		_play_sound(shatterSound, true, 1.25)
 		Global.create_vfx(largeFlashEffect, global_position)
 		var inScreenPosition: Vector2 = get_global_transform_with_canvas().origin
 		Global.create_vfx(wineSplashEffect, inScreenPosition, true, true)
 		split_into_shards(randi_range(16, 24), [1*speed, 2*speed], [spinSpeed, spinSpeed], [0.666*scale.x, scale.x])
-	super()
+	super(_omitSignal)

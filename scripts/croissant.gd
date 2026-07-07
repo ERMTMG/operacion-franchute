@@ -8,9 +8,9 @@ class_name Croissant
 func split_into_chunks(number: int, speed: float, spin: float, size: float, hp: int) -> void:
 	_split(croissantChunkScene, number, speed, spin, size, hp)
 
-func die() -> void:
+func die(_omitSignal: bool = false) -> void:
 	if !is_queued_for_deletion():
 		_play_sound(blastSound, true)
 		Global.create_vfx(largeFlashScene, global_position)
 		split_into_chunks(randi_range(3,6), 1.25*speed, 1.2*spinSpeed, scale.x, 5)
-	super()
+	super(_omitSignal)

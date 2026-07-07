@@ -6,9 +6,11 @@ float lightness(vec3 color_rgb) {
 	return max(max(color_rgb.r, color_rgb.g), color_rgb.b);
 }
 
+const float FACTOR = 19. / 64.;
+
 void fragment() {
 	vec4 color = texture(TEXTURE, UV);
-	float adjusted_y = (UV.y - 0.5) * 1.33 + 0.5;
+	float adjusted_y = UV.y * (1. + 2. * FACTOR) - FACTOR;
 	if(lightness(color.rgb) >= 0.3 && adjusted_y > progress) {
 		COLOR = color;
 	} else {

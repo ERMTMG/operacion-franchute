@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 		self.global_rotation = self.direction
 	
 
-func die() -> void:
+func die(_omitSignal: bool = false) -> void:
 	if !is_queued_for_deletion():
 		Global.create_vfx(raysScene, global_position)
 		for i in range(-3, 4):
@@ -54,4 +54,4 @@ func die() -> void:
 		_play_sound(blastSound1, true)
 		_play_sound(blastSound2)
 		_play_sound(breakSound, true, 0.8)
-	super()
+	super(_omitSignal)

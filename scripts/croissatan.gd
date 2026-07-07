@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 		shoot_out_chunks(NUMBER_CHUNKS_SHOT, 0.667*speed, 0.9*spinSpeed, scale.x, 4)
 		chunkShootTimer = 0
 
-func die() -> void:
+func die(_omitSignal: bool = false) -> void:
 	if !is_queued_for_deletion():
 		_play_sound(backgroundBlast, false, 1.25)
 		_play_sound(blastSound, true)
@@ -40,4 +40,4 @@ func die() -> void:
 		Global.create_vfx_from_node(horn1 as AnimatedSprite2D, global_position)
 		Global.create_vfx_from_node(horn2 as AnimatedSprite2D, global_position)
 		shoot_out_chunks(6, 1.333*speed, spinSpeed, scale.x, 5)
-	super()
+	super(_omitSignal)
