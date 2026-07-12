@@ -31,11 +31,11 @@ func _ready() -> void:
 	_comboTimer.wait_time = COMBO_DATA[0].timeWindowSecs
 
 func _set_combo(comboValue: int) -> void:
-	if comboValue > MAX_COMBO or comboValue < 0: return
-	_currentCombo = comboValue
+	if comboValue < 0: return
+	if comboValue <= MAX_COMBO:
+		_currentCombo = comboValue
+	combo_changed.emit(_currentCombo)
 	_comboTimer.wait_time = get_current_combo_time_window()
-	combo_changed.emit(comboValue)
-	_comboTimer.stop()
 
 func _increment_combo() -> void:
 	_set_combo(_currentCombo + 1)

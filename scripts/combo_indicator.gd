@@ -5,22 +5,25 @@ class_name ComboIndicator
 @export var numberSprite: AnimatedSprite2D
 @export var comboManager: ComboManager
 
-@export var COMBO_NUMBER_SPRITES: AnimatedTexture 
+@export var COMBO_SOUNDS: Array[AudioStream]
+@export var COMBO_FINISH_WOOSH_SOUND: AudioStream
 const MIN_COMBO_NUMBER := 2
 const MAX_COMBO_NUMBER := 8
 
-var _current_combo_number: int
+var currentComboNumber: int
 
 func set_number_sprite():
-	if _current_combo_number >= MAX_COMBO_NUMBER:
+	if currentComboNumber >= MAX_COMBO_NUMBER:
 		numberSprite.frame = MAX_COMBO_NUMBER
-	elif _current_combo_number >= MIN_COMBO_NUMBER:
-		numberSprite.frame = _current_combo_number
+	elif currentComboNumber >= MIN_COMBO_NUMBER:
+		numberSprite.frame = currentComboNumber
 
 func _on_combo_changed(newValue: int):
-	_current_combo_number = newValue + 1
+	currentComboNumber = newValue + 1
+	var soundToPlay: AudioStream
 	if newValue == 1:
-		print("new combo!")
+		soundToPlay = COMBO_SOUNDS[0]
+		Global.GAME_MANAGER.play_sfx(soundToPlay, false, 1.2)
 		set_number_sprite()
 		visible = true
 		animationPlayer.play(&"appear")
@@ -28,9 +31,16 @@ func _on_combo_changed(newValue: int):
 		animationPlayer.play(&"RESET")
 	elif newValue == 0:
 		animationPlayer.play(&"disappear")
+		soundToPlay = COMBO_FINISH_WOOSH_SOUND
+		Global.GAME_MANAGER.play_sfx(soundToPlay, false, 1.7)
 		await animationPlayer.animation_finished
 		visible = false
 	else:
+		if currentComboNumber > MAX_COMBO_NUMBER:
+			soundToPlay = COMBO_SOUNDS[MAX_COMBO_NUMBER - 2]
+		else:
+			soundToPlay = COMBO_SOUNDS[currentComboNumber - 2]
+		Global.GAME_MANAGER.play_sfx(soundToPlay, false, 1.2)
 		animationPlayer.play(&"increment")
 
 func _process(delta: float) -> void:
